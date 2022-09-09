@@ -1,6 +1,11 @@
+import 'package:client/view/authenticate/onboard/screens/get_started.dart';
+import 'package:client/view/authenticate/onboard/screens/screen2.dart';
+
+import '../screens/screen1.dart';
+
 class OnboardModel {
-  final String title;
-  final String description;
+  final String? title;
+  final String? description;
   final String image;
 
   OnboardModel(this.title, this.description, this.image);
@@ -8,9 +13,9 @@ class OnboardModel {
 }
 
 class OnboardModels {
-  final List<OnboardModel> onboardItems = [
-    OnboardModel('Order Your Food', 'Description Area', '1'),
-    OnboardModel('Order Your Food', 'Description Area', '2'),
-    OnboardModel('Order Your Food', 'Description Area', '3'),
+  final List onboardItems = [
+    Screen1(),
+    Screen2(),
+    GetStarted(),
   ];
 }

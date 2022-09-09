@@ -8,4 +8,5 @@ class CustomPadding extends EdgeInsets {
   const CustomPadding.paddingHigh()
       : super.symmetric(vertical: 40, horizontal: 40);
   const CustomPadding.paddingNormal2() : super.only(bottom: 15, top: 60);
+  const CustomPadding.padVertLow() : super.symmetric(vertical: 8);
 }

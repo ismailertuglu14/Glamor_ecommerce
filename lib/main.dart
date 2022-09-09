@@ -9,6 +9,8 @@ import 'core/init/navigation/navigation_route.dart';
 import 'core/init/navigation/navigation_service.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MultiProvider(
       providers: [...ApplicationProvider.instance.providers],

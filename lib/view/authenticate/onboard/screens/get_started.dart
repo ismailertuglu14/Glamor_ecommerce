@@ -1,22 +1,23 @@
 // ignore_for_file: sized_box_for_whitespace, deprecated_member_use, avoid_print
 
+import 'package:client/core/constants/enums/locale_keys_enum.dart';
 import 'package:client/core/constants/image/image_constants.dart';
 import 'package:client/core/extension/context_extension.dart';
+import 'package:client/core/init/cache/locale_manager.dart';
 import 'package:client/core/init/navigation/navigation_service.dart';
 import 'package:client/product/utility/border_radius.dart';
 import 'package:client/product/utility/custom_padding.dart';
 import 'package:client/product/utility/scaffold_padding.dart';
-import 'package:client/view/authenticate/login/viewmodel/login_view_model.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class GetStarted extends StatefulWidget {
+  const GetStarted({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<GetStarted> createState() => _GetStartedState();
 }
 
-class _LoginViewState extends LoginViewModel {
+class _GetStartedState extends State<GetStarted> {
   @override
   Widget build(BuildContext context) {
     return _buildScaffold(context);
@@ -60,7 +61,6 @@ class _LoginViewState extends LoginViewModel {
       padding: const CustomPadding.paddingLow(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _customText(context, 'Enjoy'),
           _customText(context, 'your'),
@@ -71,18 +71,21 @@ class _LoginViewState extends LoginViewModel {
     );
   }
 
-  Text _customText(BuildContext context, String text) {
-    return Text(
-      text,
-      style: context.textTheme.headlineLarge!
-          .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
+  Widget _customText(BuildContext context, String text) {
+    return Padding(
+      padding: const CustomPadding.padVertLow(),
+      child: Text(
+        text,
+        style: context.textTheme.headlineLarge!
+            .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
+      ),
     );
   }
 
   Widget _buildButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('Clicked');
+        LocaleManager.instance.setBoolValue(PreferencesKeys.IS_FIRST, false);
         NavigationService.instance.navigateToPage(path: '/test');
       },
       child: Container(
@@ -95,7 +98,7 @@ class _LoginViewState extends LoginViewModel {
           ),
           child: Center(
             child: Text(
-              'Login',
+              'Get Started',
               style: context.textTheme.headline5!
                   .copyWith(color: context.theme.colorScheme.primaryVariant),
               textAlign: TextAlign.center,
