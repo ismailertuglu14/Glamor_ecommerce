@@ -1,0 +1,1 @@
+enum ImagePathEnum { LOGIN }
