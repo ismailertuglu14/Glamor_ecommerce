@@ -13,7 +13,7 @@ class OnboardModel {
 }
 
 class OnboardModels {
-  final List onboardItems = [
+  final List onboardItems = const [
     Screen1(),
     Screen2(),
     GetStarted(),

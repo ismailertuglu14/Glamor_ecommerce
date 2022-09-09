@@ -1,5 +1,5 @@
 import 'package:client/core/constants/navigation/navigation_constants.dart';
-import 'package:client/view/authenticate/login/view/login_test.dart';
+import 'package:client/view/authenticate/login/view/login_view.dart';
 import 'package:client/view/authenticate/onboard/screens/get_started.dart';
 import 'package:client/view/authenticate/onboard/view/onboard_view.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
@@ -12,6 +12,8 @@ class NavigationRoute {
   Route<dynamic> generateRoute(RouteSettings args) {
     switch (args.name) {
       case NavigationConstants.DEFAULT:
+        // return normalNavigate(const LoginView(), NavigationConstants.DEFAULT);
+
         return normalNavigate(const SplashView(), NavigationConstants.DEFAULT);
       case NavigationConstants.ON_BOARD_VIEW:
         return normalNavigate(
@@ -21,7 +23,7 @@ class NavigationRoute {
         return normalNavigate(
             const GetStarted(), NavigationConstants.LOGIN_VIEW);
       case '/test':
-        return animatedNavigate(const LoginTest());
+        return animatedNavigate(const LoginView());
 
       default:
         throw Exception('Screen doesn\'t exist!');
