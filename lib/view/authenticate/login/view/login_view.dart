@@ -1,7 +1,8 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, deprecated_member_use, avoid_print
 
 import 'package:client/core/constants/image/image_constants.dart';
 import 'package:client/core/extension/context_extension.dart';
+import 'package:client/core/init/navigation/navigation_service.dart';
 import 'package:client/product/utility/border_radius.dart';
 import 'package:client/product/utility/custom_padding.dart';
 import 'package:client/product/utility/scaffold_padding.dart';
@@ -24,7 +25,7 @@ class _LoginViewState extends LoginViewModel {
   Widget _buildScaffold(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const ScaffoldPadding.paddingLow(),
+        padding: const ScaffoldPadding.paddingNormal(),
         child: Container(
           width: context.mediaQuery.size.width,
           child: Column(
@@ -47,7 +48,7 @@ class _LoginViewState extends LoginViewModel {
       height: context.mediaQuery.size.height * 0.3,
       child: Image.asset(
         ImageConstants.instance.loginShopping,
-        fit: BoxFit.contain,
+        fit: BoxFit.cover,
       ),
     );
   }
@@ -55,53 +56,51 @@ class _LoginViewState extends LoginViewModel {
   Widget _buildText(BuildContext context) {
     return Container(
       width: context.mediaQuery.size.width,
-      padding: const CustomPadding.paddingHigh(),
+      height: context.mediaQuery.size.height * 0.4,
+      padding: const CustomPadding.paddingLow(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            'Enjoy',
-            style:
-                context.textTheme.headlineLarge!.copyWith(color: Colors.black),
-          ),
-          Text(
-            'your',
-            style:
-                context.textTheme.headlineLarge!.copyWith(color: Colors.black),
-          ),
-          Text(
-            'online',
-            style:
-                context.textTheme.headlineLarge!.copyWith(color: Colors.black),
-          ),
-          Text(
-            'shopping',
-            style:
-                context.textTheme.headlineLarge!.copyWith(color: Colors.black),
-          ),
+          _customText(context, 'Enjoy'),
+          _customText(context, 'your'),
+          _customText(context, 'online'),
+          _customText(context, 'shopping'),
         ],
       ),
     );
   }
 
+  Text _customText(BuildContext context, String text) {
+    return Text(
+      text,
+      style: context.textTheme.headlineLarge!
+          .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
+    );
+  }
+
   Widget _buildButton(BuildContext context) {
-    return Container(
-        height: context.mediumValue,
-        width: context.mediaQuery.size.width,
-        margin: const CustomPadding.paddingLow(),
-        decoration: BoxDecoration(
-          color: context.theme.colorScheme.primaryContainer,
-          borderRadius: const CustomBorderRadius.radiusLow(),
-        ),
-        child: GestureDetector(
-          onTap: () {},
+    return GestureDetector(
+      onTap: () {
+        print('Clicked');
+        NavigationService.instance.navigateToPage(path: '/test');
+      },
+      child: Container(
+          height: context.mediumValue,
+          width: context.mediaQuery.size.width,
+          margin: const CustomPadding.paddingNormal2(),
+          decoration: BoxDecoration(
+            color: context.theme.colorScheme.primaryContainer,
+            borderRadius: const CustomBorderRadius.radiusLow(),
+          ),
           child: Center(
             child: Text(
               'Login',
-              style: context.textTheme.headline5,
+              style: context.textTheme.headline5!
+                  .copyWith(color: context.theme.colorScheme.primaryVariant),
               textAlign: TextAlign.center,
             ),
-          ),
-        ));
+          )),
+    );
   }
 }
