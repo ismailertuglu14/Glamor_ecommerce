@@ -8,7 +8,7 @@ class VexanaManager {
     return _instace!;
   }
 
-  static const String _baseUrl = 'baseUrl buraya gelecek';
+  static const String _baseUrl = 'https://multi-grocery.herokuapp.com/api';
 
   VexanaManager._init();
 

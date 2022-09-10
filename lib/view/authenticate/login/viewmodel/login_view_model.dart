@@ -1,14 +1,20 @@
 // ignore_for_file: avoid_print
 
+import 'package:client/core/base/base_view_model.dart';
+import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/core/init/network/vexana_manager.dart';
+import 'package:client/product/provider/user_provider.dart';
 import 'package:client/view/authenticate/login/model/login_model.dart';
 import 'package:client/view/authenticate/login/service/ILoginService.dart';
 import 'package:client/view/authenticate/login/view/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../core/constants/enums/locale_keys_enum.dart';
+import '../../../../core/init/cache/locale_manager.dart';
 import '../service/login_service.dart';
 
-abstract class LoginViewModel extends State<LoginView> {
+abstract class LoginViewModel extends State<LoginView> with BaseViewModel {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -18,10 +24,14 @@ abstract class LoginViewModel extends State<LoginView> {
   String password = '';
   bool isLoading = false;
   @override
+  BuildContext get context => super.context;
+  late UserProvider userProvider;
+  @override
   void initState() {
     super.initState();
     focusNode = FocusNode();
     loginService = LoginService(VexanaManager.instance.networkManager);
+    userProvider = Provider.of<UserProvider>(context, listen: false);
   }
 
   @override
@@ -30,11 +40,11 @@ abstract class LoginViewModel extends State<LoginView> {
     emailController.dispose();
     passwordController.dispose();
     focusNode.dispose();
-    formKey.currentState!.dispose();
   }
 
   void changeIsLoading() {
     isLoading = !isLoading;
+    setState(() {});
   }
 
   Future<void> fetchLoginService() async {
@@ -42,15 +52,13 @@ abstract class LoginViewModel extends State<LoginView> {
     if (formKey.currentState!.validate()) {
       final response = await loginService.fetchUser(LoginModel(
           email: emailController.text, password: passwordController.text));
-      // print(response.success);
-      //  print(emailController.text + passwordController.text);
+
       print('adasdsadsa');
       if (response != null) {
-        print('Response null değil');
-        print(response.token);
-        /*  await LocaleManager.instance
+        await LocaleManager.instance
             .setStringValue(PreferencesKeys.TOKEN, response.token!);
-      */
+
+        navigation.navigateToPageClear(path: NavigationConstants.TEST_VIEW);
       }
     }
     changeIsLoading();

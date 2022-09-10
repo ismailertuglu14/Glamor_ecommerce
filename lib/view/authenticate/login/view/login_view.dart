@@ -1,4 +1,5 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, avoid_print
+import 'package:client/product/constants/duration_items.dart';
 import 'package:client/product/utility/border_radius.dart';
 import 'package:client/product/utility/custom_padding.dart';
 import 'package:client/view/_product/utility/validation.dart';
@@ -24,6 +25,7 @@ class _LoginViewState extends LoginViewModel {
     return GestureDetector(
       onTap: () => setFocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
           padding: const CustomPadding.paddingNormal(),
           child: Form(
@@ -52,11 +54,22 @@ class _LoginViewState extends LoginViewModel {
                             builder: (context) => const HomeTest()));
                   }
                 }),
+                _isKeyboardOpenWidget(context),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  AnimatedContainer _isKeyboardOpenWidget(BuildContext context) {
+    return AnimatedContainer(
+      height: WidgetsBinding.instance.window.viewInsets.bottom > 0
+          ? context.highValue * 1.5
+          : 0,
+      duration: DurationItems.durationLow(),
+      child: null,
     );
   }
 
@@ -90,10 +103,7 @@ class _LoginViewState extends LoginViewModel {
 
   InkWell _buildButton(BuildContext context, String text, Function onComplete) {
     return InkWell(
-      onTap: () async {
-        fetchLoginService();
-        print('asdasd');
-      },
+      onTap: () async => isLoading == true ? null : fetchLoginService(),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 20),
         width: context.mediaQuery.size.width,

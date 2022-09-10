@@ -20,10 +20,11 @@ class _SplashViewState extends SplashViewModel {
         children: [
           Lottie.asset(
             LottiePathEnum.ECOMMERCE.rawValue,
+            repeat: false,
           ),
           const SizedBox(height: 15),
           Lottie.asset(LottiePathEnum.LOADING.rawValue,
-              width: w, fit: BoxFit.contain),
+              width: w, fit: BoxFit.contain, repeat: false),
         ],
       ),
     );

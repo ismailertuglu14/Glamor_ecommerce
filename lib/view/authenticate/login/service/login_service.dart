@@ -9,7 +9,7 @@ class LoginService extends ILoginService {
   @override
   Future<LoginResponseModel?> fetchUser(LoginModel model) async {
     final response = await manager.send<LoginResponseModel, LoginResponseModel>(
-        'auth/login',
+        '/auth/login',
         parseModel: LoginResponseModel(),
         method: RequestType.POST,
         data: model);

@@ -1,8 +1,9 @@
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/view/authenticate/login/view/login_view.dart';
-import 'package:client/view/authenticate/onboard/screens/get_started.dart';
 import 'package:client/view/authenticate/onboard/view/onboard_view.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
+import 'package:client/view/not_found/not_found_view.dart';
+import 'package:client/view/test_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigationRoute {
@@ -19,13 +20,12 @@ class NavigationRoute {
             const OnboardView(), NavigationConstants.ON_BOARD_VIEW);
 
       case NavigationConstants.LOGIN_VIEW:
-        return normalNavigate(
-            const GetStarted(), NavigationConstants.LOGIN_VIEW);
-      case '/test':
         return animatedNavigate(const LoginView());
-
+      case NavigationConstants.TEST_VIEW:
+        return normalNavigate(const TestPage(), NavigationConstants.TEST_VIEW);
       default:
-        throw Exception('Screen doesn\'t exist!');
+        throw normalNavigate(
+            const NotFoundView(), NavigationConstants.NOT_FOUND_VIEW);
       /* return MaterialPageRoute(
           builder: (context) => NotFoundNavigationWidget(),
         ); */
