@@ -13,7 +13,6 @@ class NavigationRoute {
     switch (args.name) {
       case NavigationConstants.DEFAULT:
         // return normalNavigate(const LoginView(), NavigationConstants.DEFAULT);
-
         return normalNavigate(const SplashView(), NavigationConstants.DEFAULT);
       case NavigationConstants.ON_BOARD_VIEW:
         return normalNavigate(

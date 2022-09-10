@@ -13,7 +13,7 @@ void main() {
 
   runApp(
     MultiProvider(
-      providers: [...ApplicationProvider.instance.providers],
+      providers: ApplicationProvider.instance.providers,
       child: MyApp(),
     ),
   );
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'CartDropper',
       theme: context.watch<ThemeNotifier>().currentTheme,
       onGenerateRoute: NavigationRoute.instance.generateRoute,
       navigatorKey: NavigationService.instance.navigatorKey,

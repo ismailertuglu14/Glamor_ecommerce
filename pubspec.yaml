@@ -41,6 +41,7 @@ dependencies:
   lottie: ^1.4.2
   easy_localization: ^3.0.1
   firebase_core: ^1.22.0
+  vexana: ^3.0.1
 
 dev_dependencies:
   flutter_test:

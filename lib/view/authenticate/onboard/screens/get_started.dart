@@ -10,14 +10,9 @@ import 'package:client/product/utility/custom_padding.dart';
 import 'package:client/product/utility/scaffold_padding.dart';
 import 'package:flutter/material.dart';
 
-class GetStarted extends StatefulWidget {
+class GetStarted extends StatelessWidget {
   const GetStarted({super.key});
 
-  @override
-  State<GetStarted> createState() => _GetStartedState();
-}
-
-class _GetStartedState extends State<GetStarted> {
   @override
   Widget build(BuildContext context) {
     return _buildScaffold(context);
