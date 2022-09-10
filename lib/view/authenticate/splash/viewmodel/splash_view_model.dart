@@ -9,13 +9,13 @@ import '../../../../core/base/base_view_model.dart';
 
 abstract class SplashViewModel extends State<SplashView>
     with BaseViewModel, CacheInit {
-  late bool isFirst =
-      true; // if isFirst = true Then route to onboard screen, if false Then route to Login View
+  late bool
+      isFirst; // if isFirst = true Then route to onboard screen, if false Then route to Login View
   @override
   void initState() {
     super.initState();
     initAppState();
-    Future.delayed(DurationItems.durationUltra()).then((value) {
+    Future.delayed(DurationItems.durationHigh()).then((value) {
       isFirst
           ? navigation.navigateToPageClear(
               path: NavigationConstants.ON_BOARD_VIEW)
@@ -24,9 +24,8 @@ abstract class SplashViewModel extends State<SplashView>
   }
 
   Future<void> initAppState() async {
-    await cacheInit().then((value) {
-      isFirst = localeManager.getBoolValue(PreferencesKeys.IS_FIRST);
-    });
+    await cacheInit().then(
+        (_) => isFirst = localeManager.getBoolValue(PreferencesKeys.IS_FIRST));
   }
 
   @override

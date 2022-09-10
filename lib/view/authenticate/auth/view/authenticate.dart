@@ -19,7 +19,9 @@ class _AuthenticateState extends AuthenticateModel {
   Widget build(BuildContext context) {
     return Builder(
       builder: ((context) {
-        if (token == null) {
+        String token = context.watch<UserProvider>().token.toString();
+
+        if (token == '' || token == null) {
           return const LoginView();
         } else {
           return const TestPage();

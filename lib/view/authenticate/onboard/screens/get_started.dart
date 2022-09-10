@@ -2,6 +2,7 @@
 
 import 'package:client/core/constants/enums/locale_keys_enum.dart';
 import 'package:client/core/constants/image/image_constants.dart';
+import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/core/extension/context_extension.dart';
 import 'package:client/core/init/cache/locale_manager.dart';
 import 'package:client/core/init/navigation/navigation_service.dart';
@@ -81,7 +82,8 @@ class GetStarted extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         LocaleManager.instance.setBoolValue(PreferencesKeys.IS_FIRST, false);
-        NavigationService.instance.navigateToPage(path: '/test');
+        NavigationService.instance
+            .navigateToPage(path: NavigationConstants.AUTH);
       },
       child: Container(
           height: context.mediumValue,

@@ -5,8 +5,13 @@ import 'package:client/core/init/cache/locale_manager.dart';
 import 'package:client/product/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 
-class UserProvider extends ChangeNotifier {
-  String? token;
+class UserProvider with ChangeNotifier {
+  String? _token;
+  String? get token => _token;
+  set setToken(String? value) {
+    _token = value;
+    notifyListeners();
+  }
 
   UserModel user = UserModel(email: '', username: '', type: 0);
 
@@ -15,9 +20,9 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? getToken() {
-    token = LocaleManager.instance.getStringValue(PreferencesKeys.TOKEN);
-    print('Get Token metod executed => ${token!}');
-    return token;
+  getToken() {
+    String value = LocaleManager.instance.getStringValue(PreferencesKeys
+        .TOKEN); // Locale de kayıtlı olan token değerini getirecek.
+    setToken = value;
   }
 }

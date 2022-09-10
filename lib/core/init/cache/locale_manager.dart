@@ -24,7 +24,7 @@ class LocaleManager {
   Future<void> clearAllSaveFirst() async {
     if (_preferences != null) {
       await _preferences!.clear();
-      await setBoolValue(PreferencesKeys.IS_FIRST, true);
+      await setBoolValue(PreferencesKeys.IS_FIRST, false);
     }
   }
 

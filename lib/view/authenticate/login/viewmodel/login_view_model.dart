@@ -55,6 +55,8 @@ abstract class LoginViewModel extends State<LoginView> with BaseViewModel {
 
       print('adasdsadsa');
       if (response != null) {
+        print(response.token);
+        userProvider.setToken = response.token;
         await LocaleManager.instance
             .setStringValue(PreferencesKeys.TOKEN, response.token!);
         print(response);
