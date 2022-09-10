@@ -19,8 +19,7 @@ abstract class SplashViewModel extends State<SplashView>
       isFirst
           ? navigation.navigateToPageClear(
               path: NavigationConstants.ON_BOARD_VIEW)
-          : navigation.navigateToPageClear(
-              path: NavigationConstants.LOGIN_VIEW);
+          : navigation.navigateToPageClear(path: NavigationConstants.AUTH);
     });
   }
 

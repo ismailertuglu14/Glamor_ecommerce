@@ -57,8 +57,8 @@ abstract class LoginViewModel extends State<LoginView> with BaseViewModel {
       if (response != null) {
         await LocaleManager.instance
             .setStringValue(PreferencesKeys.TOKEN, response.token!);
-
-        navigation.navigateToPageClear(path: NavigationConstants.TEST_VIEW);
+        print(response);
+        //  navigation.navigateToPageClear(path: NavigationConstants.TEST_VIEW);
       }
     }
     changeIsLoading();

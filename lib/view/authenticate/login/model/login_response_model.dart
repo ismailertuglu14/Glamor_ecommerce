@@ -4,6 +4,7 @@ class LoginResponseModel extends INetworkModel<LoginResponseModel> {
   final String? token;
   final bool? success;
   LoginResponseModel({this.token, this.success});
+
   @override
   LoginResponseModel fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(token: json['token'], success: json['success']);

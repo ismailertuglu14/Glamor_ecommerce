@@ -1,4 +1,5 @@
 import 'package:client/core/constants/navigation/navigation_constants.dart';
+import 'package:client/view/authenticate/auth/view/authenticate.dart';
 import 'package:client/view/authenticate/login/view/login_view.dart';
 import 'package:client/view/authenticate/onboard/view/onboard_view.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
@@ -18,7 +19,8 @@ class NavigationRoute {
       case NavigationConstants.ON_BOARD_VIEW:
         return normalNavigate(
             const OnboardView(), NavigationConstants.ON_BOARD_VIEW);
-
+      case NavigationConstants.AUTH:
+        return normalNavigate(const Authenticate(), NavigationConstants.AUTH);
       case NavigationConstants.LOGIN_VIEW:
         return animatedNavigate(const LoginView());
       case NavigationConstants.TEST_VIEW:
