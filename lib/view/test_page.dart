@@ -28,7 +28,7 @@ class _TestPageState extends State<TestPage> {
               provider.setToken = '';
               LocaleManager.instance.clearAllSaveFirst();
             },
-            child: Text('Tıkla'),
+            child: const Text('Tıkla'),
           )
         ],
       )),

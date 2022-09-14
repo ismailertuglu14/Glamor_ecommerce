@@ -15,8 +15,6 @@ abstract class AuthenticateModel extends State<Authenticate> {
 
       provider?.getToken();
     });
-
-    print('Widgets çalıştı');
   }
 
   parseTokenToUser() {
