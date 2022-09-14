@@ -3,6 +3,7 @@ import 'package:client/view/authenticate/auth/view/authenticate.dart';
 import 'package:client/view/authenticate/login/view/login_view.dart';
 import 'package:client/view/authenticate/onboard/view/onboard_view.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
+import 'package:client/view/home/builder/view/home_wrapper.dart';
 import 'package:client/view/not_found/not_found_view.dart';
 import 'package:client/view/test_page.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +25,11 @@ class NavigationRoute {
       case NavigationConstants.LOGIN_VIEW:
         return animatedNavigate(const LoginView());
       case NavigationConstants.TEST_VIEW:
-        return normalNavigate(const TestPage(), NavigationConstants.TEST_VIEW);
+        return normalNavigate(
+            const HomeWrapper(), NavigationConstants.TEST_VIEW);
       default:
-        throw normalNavigate(
+        return normalNavigate(
             const NotFoundView(), NavigationConstants.NOT_FOUND_VIEW);
-      /* return MaterialPageRoute(
-          builder: (context) => NotFoundNavigationWidget(),
-        ); */
     }
   }
 
