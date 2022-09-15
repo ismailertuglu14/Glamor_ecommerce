@@ -22,14 +22,18 @@ class _FeedViewState extends FeedViewModel {
   }
 
   Widget _buildScaffold() {
+    final List<Product> products =
+        Provider.of<ProductNotifier>(context).productList;
+
     return ChangeNotifierProvider(
       create: (context) => ProductNotifier(),
       child: Builder(
         builder: (context) {
           //  final provider = Provider.of<ProductNotifier>(context);
-
-          return _buildProductList(
-              context.watch<ProductNotifier>().productList);
+          if (products.isEmpty) {
+            return _buildProductLoading();
+          }
+          return _buildProductList(products);
         },
       ),
 
@@ -47,6 +51,7 @@ class _FeedViewState extends FeedViewModel {
       //     }
       //   }),
       // ),
+      //.
     );
   }
 

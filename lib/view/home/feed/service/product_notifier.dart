@@ -5,14 +5,8 @@ import 'package:provider/provider.dart';
 
 class ProductNotifier extends ChangeNotifier {
   List<Product> productList = [];
-  ProductNotifier() {
-    if (productList.isEmpty) {
-      _fetchProducts();
-    }
-    print(productList.length);
-  }
 
-  Future<void> _fetchProducts() async {
+  Future<void> fetchProducts() async {
     try {
       final apiProducts = await ProductService.instance.getProducts();
       productList = apiProducts;
