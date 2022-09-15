@@ -1,6 +1,7 @@
 import 'package:client/view/home/feed/model/rating_model.dart';
+import 'package:vexana/vexana.dart';
 
-class Product {
+class Product extends INetworkModel<Product> {
   int? id;
   String? title;
   dynamic price;
@@ -39,6 +40,7 @@ class Product {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -63,5 +65,10 @@ class Product {
           ? null
           : Rating.fromJson(json['rating'] as Map<String, dynamic>),
     );
+  }
+
+  @override
+  Product fromJson(Map<String, dynamic> json) {
+    return Product.fromJson(json);
   }
 }

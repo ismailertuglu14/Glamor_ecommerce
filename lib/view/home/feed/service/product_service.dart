@@ -1,18 +1,29 @@
-import 'package:client/view/home/feed/model/product_model.dart';
-import 'package:dio/dio.dart';
+import 'dart:convert';
 
-class ProductService {
-  Dio dio = Dio(BaseOptions(baseUrl: 'https://fakestoreapi.com/products'));
-  Future<List<Product>> fetchProducts() async {
-    var response = await dio.get('/');
-    List<Product> productList = [];
+import 'package:client/view/home/feed/service/IProductService.dart';
+import 'package:vexana/vexana.dart';
 
-    if (response.data is List) {
-      (response.data as List)
-          .map((e) => productList.add(Product.fromJson(e)))
-          .toList();
-    }
+import '../model/product_model.dart';
+import 'package:http/http.dart' as http;
 
-    return productList;
+class ProductService extends IProductService {
+  static ProductService? _instance;
+
+  ProductService._();
+
+  static ProductService get instance {
+    return _instance ??= ProductService._();
+  }
+
+  @override
+  Future<List<Product>> getProducts() async {
+    final getProducts = await http
+        .get(Uri.parse('https://fakestoreapi.com/products'), headers: {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    });
+    final List responseBody = jsonDecode(getProducts.body);
+
+    return responseBody.map((e) => Product.fromJson(e)).toList();
   }
 }

@@ -1,9 +1,13 @@
 import 'package:client/core/constants/navigation/navigation_constants.dart';
+import 'package:client/core/init/network/vexana_manager.dart';
 import 'package:client/view/_product/widgets/card/product_card.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
+import 'package:client/view/home/feed/service/product_notifier.dart';
+import 'package:client/view/home/feed/service/product_service.dart';
 import 'package:client/view/home/feed/viewmodel/feed_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 class FeedView extends StatefulWidget {
   const FeedView({super.key});
@@ -14,24 +18,35 @@ class FeedView extends StatefulWidget {
 class _FeedViewState extends FeedViewModel {
   @override
   Widget build(BuildContext context) {
-    return _buildScaffold();
+    return Scaffold(body: _buildScaffold());
   }
 
   Widget _buildScaffold() {
-    return Scaffold(
-      body: FutureBuilder<List<Product>>(
-        future: productList,
-        builder: ((context, snapshot) {
-          if (!snapshot.hasData) {
-            return _buildProductLoading();
-          } else if (snapshot.hasData) {
-            var list = snapshot.data;
-            return _buildProductList(list!);
-          } else {
-            return _buildProductError();
-          }
-        }),
+    return ChangeNotifierProvider(
+      create: (context) => ProductNotifier(),
+      child: Builder(
+        builder: (context) {
+          //  final provider = Provider.of<ProductNotifier>(context);
+
+          return _buildProductList(
+              context.watch<ProductNotifier>().productList);
+        },
       ),
+
+      // body: FutureBuilder<List<Product>>(
+      //   future: ProductService(VexanaManager.instance.networkManager)
+      //       .fetchProducts(),
+      //   builder: ((context, snapshot) {
+      //     if (!snapshot.hasData) {
+      //       return _buildProductLoading();
+      //     } else if (snapshot.hasData) {
+      //       var list = snapshot.data;
+      //       return _buildProductList(list!);
+      //     } else {
+      //       return _buildProductError();
+      //     }
+      //   }),
+      // ),
     );
   }
 
