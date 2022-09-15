@@ -66,19 +66,10 @@ class _FeedViewState extends FeedViewModel {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4),
       child: SingleChildScrollView(
+        key: const PageStorageKey<String>('feed'),
         child: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: const TextStyle(letterSpacing: 3),
-                  suffixIcon: GestureDetector(
-                      onTap: () {
-                        navigation.navigateToPage(
-                            path: NavigationConstants.CATEGORY);
-                      },
-                      child: const Icon(Icons.format_list_numbered_rtl_sharp))),
-            ),
+            _buildTextField(),
             MasonryGridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -101,9 +92,18 @@ class _FeedViewState extends FeedViewModel {
     );
   }
 
-  Center _buildProductError() {
-    return const Center(
-      child: Text('Some error occured while getting products!'),
+  TextField _buildTextField() {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: 'Search',
+        hintStyle: const TextStyle(letterSpacing: 3),
+        suffixIcon: GestureDetector(
+          onTap: () {
+            navigation.navigateToPage(path: NavigationConstants.CATEGORY);
+          },
+          child: const Icon(Icons.format_list_numbered_rtl_sharp),
+        ),
+      ),
     );
   }
 }
