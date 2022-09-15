@@ -1,6 +1,7 @@
 import 'package:client/core/base/base_view_model.dart';
 import 'package:client/view/home/chats/view/chats_view.dart';
 import 'package:client/view/home/feed/view/feed_view.dart';
+import 'package:client/view/home/my_ads/view/myads_view.dart';
 import 'package:client/view/home/profile/view/profile_view.dart';
 import 'package:client/view/home/sell/sell_view.dart';
 import 'package:client/view/home/category/view/category_view.dart';
@@ -35,7 +36,7 @@ abstract class HomeWrapperModel extends State<HomeWrapper> {
 
   final List viewList = const [
     FeedView(),
-    CategoryView(),
+    MyAdsView(),
     SellView(),
     ChatsView(),
     ProfileView(),

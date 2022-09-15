@@ -53,7 +53,7 @@ abstract class LoginViewModel extends State<LoginView> with BaseViewModel {
       final response = await loginService.fetchUser(LoginModel(
           email: emailController.text, password: passwordController.text));
 
-      print('adasdsadsa');
+      print('fetchLoading in process');
       if (response != null) {
         print(response.token);
         userProvider.setToken = response.token;

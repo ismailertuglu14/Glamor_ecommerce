@@ -12,6 +12,7 @@ class ThemeNotifier extends ChangeNotifier {
   /// Deafult value is [AppThemes.LIGHT]
   AppTheme get currenThemeEnum => _currenThemeEnum;
 
+  /// Default value is [_currentTheme]
   ThemeData get currentTheme => _currentTheme;
 
   void changeValue(AppTheme theme) {
