@@ -5,6 +5,8 @@ import 'package:client/view/authenticate/onboard/view/onboard_view.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
 import 'package:client/view/home/builder/view/home_wrapper.dart';
 import 'package:client/view/home/category/view/category_view.dart';
+import 'package:client/view/home/feed/model/product_model.dart';
+import 'package:client/view/home/product/view/product_view.dart';
 import 'package:client/view/not_found/not_found_view.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +34,16 @@ class NavigationRoute {
       case NavigationConstants.CATEGORY:
         return normalNavigate(
             const CategoryView(), NavigationConstants.CATEGORY);
+      // Product View
+      case NavigationConstants.PRODUCT_VIEW:
+        if (args.arguments is Product) {
+          return normalNavigate(
+              ProductView(
+                product: args.arguments as Product,
+              ),
+              NavigationConstants.PRODUCT_VIEW);
+        }
+        throw Exception();
       //Test View
       case NavigationConstants.TEST_VIEW:
         return normalNavigate(
@@ -46,6 +58,7 @@ class NavigationRoute {
   MaterialPageRoute normalNavigate(Widget widget, String pageName) {
     return MaterialPageRoute(
         builder: (context) => widget,
+
         //analytciste görülecek olan sayfa ismi için pageName veriyoruz
         settings: RouteSettings(name: pageName));
   }
