@@ -3,13 +3,14 @@
 import 'package:client/core/init/notifier/providers.dart';
 import 'package:client/core/init/notifier/theme_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'core/init/navigation/navigation_route.dart';
 import 'core/init/navigation/navigation_service.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  initApp();
 
   runApp(
     MultiProvider(
@@ -17,6 +18,11 @@ void main() {
       child: MyApp(),
     ),
   );
+}
+
+initApp() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIOverlays([]);
 }
 
 class MyApp extends StatelessWidget {
