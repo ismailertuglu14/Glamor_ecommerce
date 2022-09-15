@@ -14,24 +14,21 @@ class _HomeWrapperState extends HomeWrapperModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Builder(builder: (context) {
-        return PageView.builder(
-          controller: pageController,
-          onPageChanged: ((value) {}),
-          itemCount: viewList.length,
-          itemBuilder: (context, index) {
-            return viewList[index];
-          },
-        );
-      }),
+      body: PageView.builder(
+        controller: pageController,
+        onPageChanged: ((value) {
+          slidePage(value);
+        }),
+        itemCount: viewList.length,
+        itemBuilder: (context, index) {
+          return viewList[index];
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         showUnselectedLabels: false,
-        currentIndex: context.watch<PageViewProvider>().currentIndex,
+        currentIndex: bottomCurrentPage,
         onTap: (value) {
-          context.read<PageViewProvider>().setIndex(value);
-          Future.microtask(() {
-            changePage(value);
-          });
+          changePage(value);
         },
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,

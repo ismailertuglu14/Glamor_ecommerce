@@ -19,7 +19,6 @@ class ApplicationProvider {
   List<SingleChildWidget> providers = [
     ChangeNotifierProvider(create: (context) => ThemeNotifier()),
     ChangeNotifierProvider(create: (context) => UserProvider()),
-    ChangeNotifierProvider(create: (context) => PageViewProvider()),
     Provider.value(value: NavigationService.instance)
   ];
 }

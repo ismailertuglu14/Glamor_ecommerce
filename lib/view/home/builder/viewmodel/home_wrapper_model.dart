@@ -12,6 +12,7 @@ import '../view/home_wrapper.dart';
 abstract class HomeWrapperModel extends State<HomeWrapper> {
   late PageController pageController;
   int currentPage = 0;
+  int bottomCurrentPage = 0;
   @override
   void initState() {
     super.initState();
@@ -20,19 +21,16 @@ abstract class HomeWrapperModel extends State<HomeWrapper> {
 
   void slidePage(int index) {
     setState(() {
-      currentPage = index;
-
-      pageController.animateToPage(index,
-          duration: const Duration(milliseconds: 500), curve: Curves.ease);
+      bottomCurrentPage = index;
     });
   }
 
   void changePage(int index) {
     setState(() {
       currentPage = index;
-      pageController.animateToPage(index,
-          duration: const Duration(milliseconds: 500), curve: Curves.ease);
     });
+    pageController.animateToPage(currentPage,
+        duration: const Duration(milliseconds: 500), curve: Curves.ease);
   }
 
   final List viewList = const [
@@ -42,13 +40,4 @@ abstract class HomeWrapperModel extends State<HomeWrapper> {
     ChatsView(),
     ProfileView(),
   ];
-}
-
-class PageViewProvider extends ChangeNotifier {
-  int currentIndex = 0;
-  void setIndex(int index) {
-    currentIndex = index;
-
-    notifyListeners();
-  }
 }
