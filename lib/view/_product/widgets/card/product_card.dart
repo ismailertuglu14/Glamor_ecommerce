@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:client/core/base/base_view_model.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/core/init/navigation/navigation_service.dart';
 import 'package:flutter/material.dart';
