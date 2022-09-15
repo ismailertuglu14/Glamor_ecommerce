@@ -4,8 +4,8 @@ import 'package:client/view/authenticate/login/view/login_view.dart';
 import 'package:client/view/authenticate/onboard/view/onboard_view.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
 import 'package:client/view/home/builder/view/home_wrapper.dart';
+import 'package:client/view/home/category/view/category_view.dart';
 import 'package:client/view/not_found/not_found_view.dart';
-import 'package:client/view/test_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigationRoute {
@@ -14,19 +14,29 @@ class NavigationRoute {
   NavigationRoute._init();
   Route<dynamic> generateRoute(RouteSettings args) {
     switch (args.name) {
+      // Splash View
       case NavigationConstants.DEFAULT:
         // return normalNavigate(const LoginView(), NavigationConstants.DEFAULT);
         return normalNavigate(const SplashView(), NavigationConstants.DEFAULT);
+      //Onboard Slider View
       case NavigationConstants.ON_BOARD_VIEW:
         return normalNavigate(
             const OnboardView(), NavigationConstants.ON_BOARD_VIEW);
+      //Auth Builder
       case NavigationConstants.AUTH:
         return normalNavigate(const Authenticate(), NavigationConstants.AUTH);
+      // Login View
       case NavigationConstants.LOGIN_VIEW:
         return animatedNavigate(const LoginView());
+      // Category View
+      case NavigationConstants.CATEGORY:
+        return normalNavigate(
+            const CategoryView(), NavigationConstants.CATEGORY);
+      //Test View
       case NavigationConstants.TEST_VIEW:
         return normalNavigate(
             const HomeWrapper(), NavigationConstants.TEST_VIEW);
+      //Not Found View
       default:
         return normalNavigate(
             const NotFoundView(), NavigationConstants.NOT_FOUND_VIEW);

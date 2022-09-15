@@ -1,3 +1,4 @@
+import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/view/_product/widgets/card/product_card.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/feed/viewmodel/feed_view_model.dart';
@@ -16,7 +17,7 @@ class _FeedViewState extends FeedViewModel {
     return _buildScaffold();
   }
 
-  Scaffold _buildScaffold() {
+  Widget _buildScaffold() {
     return Scaffold(
       body: FutureBuilder<List<Product>>(
         future: productList,
@@ -46,8 +47,16 @@ class _FeedViewState extends FeedViewModel {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const TextField(
-              decoration: InputDecoration(hintText: 'Search'),
+            TextField(
+              decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: const TextStyle(letterSpacing: 3),
+                  suffixIcon: GestureDetector(
+                      onTap: () {
+                        navigation.navigateToPage(
+                            path: NavigationConstants.CATEGORY);
+                      },
+                      child: const Icon(Icons.format_list_numbered_rtl_sharp))),
             ),
             MasonryGridView.builder(
               physics: const NeverScrollableScrollPhysics(),
