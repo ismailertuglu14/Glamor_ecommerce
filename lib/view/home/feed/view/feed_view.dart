@@ -1,4 +1,5 @@
 import 'package:client/core/constants/navigation/navigation_constants.dart';
+import 'package:client/core/init/navigation/navigation_service.dart';
 import 'package:client/core/init/network/vexana_manager.dart';
 import 'package:client/view/_product/widgets/card/product_card.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
@@ -86,14 +87,8 @@ class _FeedViewState extends FeedViewModel {
               crossAxisSpacing: 10,
               itemCount: list.length,
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    // NavigationService.instance.navigateToPage(
-                    //     path: NavigationConstants.HOME_VIEW);
-                  },
-                  child: ProductCard(
-                    product: list[index],
-                  ),
+                return ProductCard(
+                  product: list[index],
                 );
               },
               gridDelegate:
