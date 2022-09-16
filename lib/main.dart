@@ -22,7 +22,7 @@ void main() {
 
 initApp() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays([]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 }
 
 class MyApp extends StatelessWidget {
