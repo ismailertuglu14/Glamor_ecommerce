@@ -38,7 +38,7 @@ abstract class LoginViewModel extends State<LoginView> with BaseViewModel {
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
-    focusNode.dispose();
+    //focusNode.dispose();
   }
 
   void changeIsLoading() {
