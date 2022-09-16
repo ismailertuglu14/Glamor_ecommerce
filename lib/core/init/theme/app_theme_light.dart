@@ -62,7 +62,7 @@ class AppThemeLight extends AppTheme with ILightTheme {
   ColorScheme get _appColorScheme {
     return ColorScheme(
       primary: colorSchemeLight!.black,
-      primaryVariant: Colors.white, //xx
+      primaryVariant: Colors.grey, //xx
       secondary: Colors.green,
       secondaryVariant: colorSchemeLight!.azure,
       surface: Colors.blue, //xx
