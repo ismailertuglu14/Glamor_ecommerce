@@ -5,76 +5,90 @@ import 'package:flutter/material.dart';
 
 import '../../../home/feed/model/product_model.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final Product? product;
   const ProductCard({super.key, this.product});
 
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
     return buildImageInteractionCard(context);
   }
 
-  Widget buildImageInteractionCard(BuildContext context) => GestureDetector(
-        onTap: () {
-          NavigationService.instance.navigateToPage(
-              path: NavigationConstants.PRODUCT_VIEW, data: product);
-        },
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            children: [
-              /* Product Image*/
-              Stack(
-                children: [
-                  SizedBox(
-                    height: 150,
-                    child: CachedNetworkImage(
-                      key: UniqueKey(),
-                      imageUrl: product!.image.toString(),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ],
-              ),
-              /* Product Title*/
-              Padding(
-                padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-                child: Text(
-                  product!.title.toString(),
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ),
-              /* Product Rate*/
-              ButtonBar(
-                alignment: MainAxisAlignment.start,
-                children: [
-                  TextButton(
-                    child: Text('${product!.rating!.rate}⭐'),
-                    onPressed: () {},
-                  ),
-                  /* Product Price*/
-                  TextButton(
-                    child: Text('${product!.price} TL'),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              /* Product Seller Location */
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                child: Row(
-                  children: const [
-                    Icon(Icons.location_on_outlined),
-                    Text('TUZLA, ISTANBUL'),
-                  ],
-                ),
-              ),
-            ],
-          ),
+  Widget buildImageInteractionCard(BuildContext context) {
+    bool isFavorite = false;
+    return GestureDetector(
+      onTap: () {
+        NavigationService.instance.navigateToPage(
+            path: NavigationConstants.PRODUCT_VIEW, data: widget.product);
+      },
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
-      );
+        child: Column(
+          children: [
+            /* Product Image*/
+            Stack(
+              children: [
+                SizedBox(
+                  height: 150,
+                  child: CachedNetworkImage(
+                    key: UniqueKey(),
+                    imageUrl: widget.product!.image.toString(),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ],
+            ),
+            /* Product Title*/
+            Padding(
+              padding: const EdgeInsets.all(16).copyWith(bottom: 0),
+              child: Text(
+                widget.product!.title.toString(),
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+            /* Product Rate*/
+            ButtonBar(
+              alignment: MainAxisAlignment.start,
+              children: [
+                TextButton(
+                  child: Text('${widget.product!.rating!.rate}⭐'),
+                  onPressed: () {},
+                ),
+                /* Product Price*/
+                TextButton(
+                  child: Text('${widget.product!.price} TL'),
+                  onPressed: () {},
+                )
+              ],
+            ),
+            /* Product Seller Location */
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Icon(Icons.location_on_outlined),
+                  const Text('TUZLA, ISTANBUL'),
+                  GestureDetector(
+                    onTap: () {
+                      print('Clicked on Favorite button!');
+                    },
+                    child: Icon(Icons.favorite_border),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

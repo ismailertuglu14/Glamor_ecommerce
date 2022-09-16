@@ -1,10 +1,7 @@
 import 'package:client/core/constants/navigation/navigation_constants.dart';
-import 'package:client/core/init/navigation/navigation_service.dart';
-import 'package:client/core/init/network/vexana_manager.dart';
 import 'package:client/view/_product/widgets/card/product_card.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/feed/service/product_notifier.dart';
-import 'package:client/view/home/feed/service/product_service.dart';
 import 'package:client/view/home/feed/viewmodel/feed_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -64,7 +61,8 @@ class _FeedViewState extends FeedViewModel {
 
   Widget _buildProductList(List<Product> list) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4),
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4)
+          .copyWith(bottom: 1),
       child: SingleChildScrollView(
         key: const PageStorageKey<String>('feed'),
         child: Column(

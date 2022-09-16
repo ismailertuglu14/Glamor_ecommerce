@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../viewmodel/home_wrapper_model.dart';
 
@@ -34,7 +33,8 @@ class _HomeWrapperState extends HomeWrapperModel {
         unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Feed'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.production_quantity_limits), label: 'MY ADS'),
           BottomNavigationBarItem(
               icon: Icon(Icons.add_circle_outline), label: 'Sell'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),

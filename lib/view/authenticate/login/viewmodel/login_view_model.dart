@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:client/core/base/base_view_model.dart';
-import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/core/init/network/vexana_manager.dart';
 import 'package:client/product/provider/user_provider.dart';
 import 'package:client/view/authenticate/login/model/login_model.dart';

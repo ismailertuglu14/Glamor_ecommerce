@@ -1,6 +1,5 @@
+import 'package:client/view/home/chats/viewmodel/chats_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ChatsView extends StatefulWidget {
   const ChatsView({super.key});
@@ -9,11 +8,16 @@ class ChatsView extends StatefulWidget {
   State<ChatsView> createState() => _ChatsViewState();
 }
 
-class _ChatsViewState extends State<ChatsView> {
+class _ChatsViewState extends ChatsViewModel {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text('Chats')),
+    return DefaultTabController(
+      length: MyTabViews.values.length,
+      child: Scaffold(
+        extendBody: true,
+        appBar: tab(),
+        body: tabbarView(),
+      ),
     );
   }
 }

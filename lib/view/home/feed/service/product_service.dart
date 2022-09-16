@@ -1,7 +1,8 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:convert';
 
 import 'package:client/view/home/feed/service/IProductService.dart';
-import 'package:vexana/vexana.dart';
 
 import '../model/product_model.dart';
 import 'package:http/http.dart' as http;

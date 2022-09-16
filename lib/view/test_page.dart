@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:client/core/init/cache/locale_manager.dart';
 import 'package:client/product/provider/user_provider.dart';
 import 'package:flutter/material.dart';
