@@ -16,10 +16,10 @@ class FeedView extends StatefulWidget {
 class _FeedViewState extends FeedViewModel {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildScaffold());
+    return Scaffold(body: _buildBody());
   }
 
-  Widget _buildScaffold() {
+  Widget _buildBody() {
     final List<Product> products =
         Provider.of<ProductNotifier>(context).productList;
 
@@ -60,33 +60,53 @@ class _FeedViewState extends FeedViewModel {
   }
 
   Widget _buildProductList(List<Product> list) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4)
-          .copyWith(bottom: 1),
-      child: SingleChildScrollView(
-        key: const PageStorageKey<String>('feed'),
-        child: Column(
-          children: [
-            _buildTextField(),
-            MasonryGridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(top: 20),
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                return ProductCard(
-                  product: list[index],
-                );
-              },
-              gridDelegate:
-                  const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
-            ),
-          ],
+    return GestureDetector(
+      onTap: () => setFocus(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4)
+            .copyWith(bottom: 1),
+        child: SingleChildScrollView(
+          key: const PageStorageKey<String>('feed'),
+          child: Column(
+            children: [
+              _buildTextField(),
+              _buildHorizontalContainer(),
+              _buildItemList(list),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  MasonryGridView _buildItemList(List<Product> list) {
+    return MasonryGridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: const EdgeInsets.only(top: 20),
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
+      itemCount: list.length,
+      itemBuilder: (context, index) {
+        return ProductCard(
+          product: list[index],
+        );
+      },
+      gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2),
+    );
+  }
+
+  Wrap _buildHorizontalContainer() {
+    return Wrap(
+      children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: const [],
+          ),
+        ),
+      ],
     );
   }
 

@@ -15,6 +15,7 @@ class _HomeWrapperState extends HomeWrapperModel {
     return Scaffold(
       body: PageView.builder(
         controller: pageController,
+        physics: const NeverScrollableScrollPhysics(),
         onPageChanged: ((value) {
           slidePage(value);
         }),

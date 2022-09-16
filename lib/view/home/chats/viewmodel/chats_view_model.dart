@@ -27,7 +27,6 @@ abstract class ChatsViewModel extends State<ChatsView>
 
   TabBarView tabbarView() {
     return TabBarView(
-      physics: const NeverScrollableScrollPhysics(),
       controller: tabController,
       children: const [
         MessagesView(),

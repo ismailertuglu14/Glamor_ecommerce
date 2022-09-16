@@ -73,7 +73,7 @@ class _ProfileViewState extends ProfileViewModel {
         child: ListTile(
           leading: Icon(icon),
           title: Text(title),
-          trailing: const Icon(Icons.arrow_forward_ios),
+          trailing: func == null ? const Icon(Icons.arrow_forward_ios) : null,
         ),
       ),
     );
