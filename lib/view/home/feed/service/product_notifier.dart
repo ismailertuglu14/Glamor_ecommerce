@@ -9,6 +9,7 @@ class ProductNotifier extends ChangeNotifier {
     try {
       final apiProducts = await ProductService.instance.getProducts();
       productList = apiProducts;
+
       notifyListeners();
     } catch (e) {
       throw e.toString();

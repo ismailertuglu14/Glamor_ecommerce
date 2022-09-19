@@ -11,6 +11,7 @@ abstract class FeedViewModel extends State<FeedView> with BaseViewModel {
     super.initState();
     final products = Provider.of<ProductNotifier>(context, listen: false);
     products.fetchProducts();
+
     focusNode = FocusNode();
     // productList =
     //     ProductService(VexanaManager.instance.networkManager).fetchProducts();

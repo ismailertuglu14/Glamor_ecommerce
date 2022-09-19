@@ -63,13 +63,14 @@ class _FeedViewState extends FeedViewModel {
     return GestureDetector(
       onTap: () => setFocus(),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4)
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8)
             .copyWith(bottom: 1),
         child: SingleChildScrollView(
           key: const PageStorageKey<String>('feed'),
           child: Column(
             children: [
               _buildTextField(),
+              _buildFiltersContainer(),
               _buildHorizontalContainer(),
               _buildItemList(list),
             ],
@@ -79,21 +80,55 @@ class _FeedViewState extends FeedViewModel {
     );
   }
 
-  MasonryGridView _buildItemList(List<Product> list) {
-    return MasonryGridView.builder(
+  Widget _buildItemList(List<Product> list) {
+    var size = MediaQuery.of(context).size;
+
+    /*24 is for notification bar on Android*/
+    final double itemHeight = (size.height - kToolbarHeight - 100) / 2;
+    final double itemWidth = size.width / 2;
+    return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      padding: const EdgeInsets.only(top: 20),
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+        crossAxisCount: 2,
+        childAspectRatio: (itemWidth / itemHeight),
+      ),
       itemCount: list.length,
-      itemBuilder: (context, index) {
-        return ProductCard(
-          product: list[index],
-        );
-      },
-      gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2),
+      itemBuilder: (context, index) => ProductCard(product: list[index]),
+    );
+    // return MasonryGridView.builder(
+    //   physics: const NeverScrollableScrollPhysics(),
+    //   shrinkWrap: true,
+    //   padding: const EdgeInsets.only(top: 20),
+    //   mainAxisSpacing: 10,
+    //   crossAxisSpacing: 10,
+    //   itemCount: list.length,
+    //   itemBuilder: (context, index) {
+    //     return ProductCard(
+    //       product: list[index],
+    //     );
+    //   },
+    //   gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+    //       crossAxisCount: 2),
+    // );
+  }
+
+  Widget _buildFiltersContainer() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          GestureDetector(
+            onTap: () {
+              navigation.navigateToPage(path: NavigationConstants.CATEGORY);
+            },
+            child: const Icon(Icons.format_list_numbered_rtl_sharp),
+          ),
+        ],
+      ),
     );
   }
 
@@ -117,9 +152,9 @@ class _FeedViewState extends FeedViewModel {
         hintStyle: const TextStyle(letterSpacing: 3),
         suffixIcon: GestureDetector(
           onTap: () {
-            navigation.navigateToPage(path: NavigationConstants.CATEGORY);
+            //TODO: Clear text stuffs
           },
-          child: const Icon(Icons.format_list_numbered_rtl_sharp),
+          child: const Icon(Icons.close),
         ),
       ),
     );

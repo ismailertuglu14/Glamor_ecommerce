@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names, deprecated_member_use
 
-import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/product/provider/user_provider.dart';
 import 'package:client/view/home/profile/viewmodel/profile_view_model.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/core/init/navigation/navigation_service.dart';
+import 'package:client/product/extension/string_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../home/feed/model/product_model.dart';
@@ -20,7 +21,6 @@ class _ProductCardState extends State<ProductCard> {
   }
 
   Widget buildImageInteractionCard(BuildContext context) {
-    bool isFavorite = false;
     return GestureDetector(
       onTap: () {
         NavigationService.instance.navigateToPage(
@@ -32,12 +32,13 @@ class _ProductCardState extends State<ProductCard> {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             /* Product Image*/
             Stack(
               children: [
                 SizedBox(
-                  height: 150,
+                  height: 100,
                   child: CachedNetworkImage(
                     key: UniqueKey(),
                     imageUrl: widget.product!.image.toString(),
@@ -50,7 +51,7 @@ class _ProductCardState extends State<ProductCard> {
             Padding(
               padding: const EdgeInsets.all(16).copyWith(bottom: 0),
               child: Text(
-                widget.product!.title.toString(),
+                widget.product!.title.toString().constrict(),
                 style: const TextStyle(fontSize: 16),
               ),
             ),
@@ -77,12 +78,6 @@ class _ProductCardState extends State<ProductCard> {
                 children: [
                   const Icon(Icons.location_on_outlined),
                   const Text('TUZLA, ISTANBUL'),
-                  GestureDetector(
-                    onTap: () {
-                      print('Clicked on Favorite button!');
-                    },
-                    child: Icon(Icons.favorite_border),
-                  ),
                 ],
               ),
             ),

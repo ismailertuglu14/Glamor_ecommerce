@@ -1,4 +1,6 @@
+import 'package:client/view/_product/widgets/popup/exit_popup.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../viewmodel/home_wrapper_model.dart';
 
@@ -12,36 +14,28 @@ class HomeWrapper extends StatefulWidget {
 class _HomeWrapperState extends HomeWrapperModel {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView.builder(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        onPageChanged: ((value) {
-          slidePage(value);
-        }),
-        itemCount: viewList.length,
-        itemBuilder: (context, index) {
-          return viewList[index];
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: false,
-        currentIndex: bottomCurrentPage,
-        onTap: (value) {
-          changePage(value);
-        },
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Feed'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.production_quantity_limits), label: 'MY ADS'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle_outline), label: 'Sell'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline), label: 'Profile'),
-        ],
+    return WillPopScope(
+      onWillPop: () => onWillPop(context),
+      child: Scaffold(
+        body: PageView.builder(
+          controller: pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: viewList.length,
+          itemBuilder: (context, index) {
+            return viewList[index];
+          },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          showUnselectedLabels: false,
+          currentIndex: Provider.of<HomeProvider>(context).currentIndex,
+          onTap: (value) {
+            Provider.of<HomeProvider>(context, listen: false).changePage(value);
+            changePage(value);
+          },
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          items: bottomNavItems,
+        ),
       ),
     );
   }
