@@ -4,7 +4,6 @@ import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/feed/service/product_notifier.dart';
 import 'package:client/view/home/feed/viewmodel/feed_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
 class FeedView extends StatefulWidget {

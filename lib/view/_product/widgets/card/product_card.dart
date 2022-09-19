@@ -75,9 +75,9 @@ class _ProductCardState extends State<ProductCard> {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Icon(Icons.location_on_outlined),
-                  const Text('TUZLA, ISTANBUL'),
+                children: const [
+                  Icon(Icons.location_on_outlined),
+                  Text('TUZLA, ISTANBUL'),
                 ],
               ),
             ),
