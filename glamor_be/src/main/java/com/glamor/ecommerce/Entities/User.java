@@ -1,41 +1,42 @@
 package com.glamor.ecommerce.Entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@RequiredArgsConstructor
-@Getter
-@Setter
+@Data
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String lastname;
+
+    @Column(nullable = false)
+    private String password;
+
+    private String avatar;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "product_ids",nullable = true)
+    private List<Product> product;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "favorite_ids",nullable = true)
+    private List<Favorite> favorite;
 }
-
-/*
-_Id ( PK )
-_ProductsId ( FK , Default empty list )
-_FavoritesId ( FK, Default empty list )
-Firstname ( Required, String )
-Lastname ( Required, String )
-Email ( Required, String )
-Password ( Required, String, Must be hashed )
-ProfilePicture ( Nullable, String )
-Subscribers ( Default empty list )
-Subscriptions ( Default empty list )
-
-??? TotalLiked ( Default 0, Number )
-??? TotalFavorited ( Default 0, Number )
- */
