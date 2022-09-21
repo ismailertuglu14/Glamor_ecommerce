@@ -1,16 +1,16 @@
 package com.glamor.ecommerce.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Data
+@Table(name = "subcategories")
 public class Subcategory {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,15 @@ public class Subcategory {
         private String title;
 
         @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "category_id")
         @JsonIgnore
         @ToString.Exclude
         @EqualsAndHashCode.Exclude
-        @JoinColumn(name = "category_id",nullable = true)
         private Category category;
+
+        @OneToMany(mappedBy = "subcategory")
+        @JsonIgnore
+        @ToString.Exclude
+        @EqualsAndHashCode.Exclude
+        private List<ProductSubcategory> product_subcategory;
 }

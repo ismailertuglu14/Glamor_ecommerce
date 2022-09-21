@@ -30,13 +30,11 @@ public class User {
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "product_ids",nullable = true)
     private List<Product> product;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "favorite_ids",nullable = true)
     private List<Favorite> favorite;
 }

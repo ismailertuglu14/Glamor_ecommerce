@@ -21,6 +21,5 @@ public class Brand {
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JoinColumn(name = "product_ids",nullable = true)
     private List<Product> product;
 }
