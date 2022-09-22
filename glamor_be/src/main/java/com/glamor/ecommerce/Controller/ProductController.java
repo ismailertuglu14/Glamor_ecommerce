@@ -17,11 +17,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-    /*
     @PostMapping
     public Product createProduct(@RequestBody ProductRequest product){
         return productService.saveProduct(product);
     }
-
-     */
 }
