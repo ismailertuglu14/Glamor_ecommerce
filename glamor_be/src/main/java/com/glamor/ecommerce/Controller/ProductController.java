@@ -6,6 +6,8 @@ import com.glamor.ecommerce.Entities.Product;
 import com.glamor.ecommerce.Service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/product")
 public class ProductController {
@@ -13,6 +15,11 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping("/get/products")
+    public List<ProductResponse> getAllProducts(){
+        return productService.getProducts();
     }
 
     @GetMapping("/get/{productId}")

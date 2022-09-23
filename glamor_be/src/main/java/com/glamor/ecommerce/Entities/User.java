@@ -26,7 +26,7 @@ public class User {
 
     private String avatar;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

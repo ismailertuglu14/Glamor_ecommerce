@@ -11,6 +11,9 @@ import com.glamor.ecommerce.Repository.ProductRepository;
 import com.glamor.ecommerce.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
@@ -44,5 +47,19 @@ public class ProductService {
         response.setUser(product.getUser());
         response.setBrand(product.getBrand());
         return response;
+    }
+
+    public List<ProductResponse> getProducts() {
+        List<ProductResponse> products = productRepository.findAll().stream().map(product -> {
+            ProductResponse new1 = new ProductResponse();
+            new1.setTitle(product.getTitle());
+            new1.setDescription(product.getDescrpition());
+            new1.setPrice(product.getPrice());
+            new1.setLocation(product.getLocation());
+            new1.setUser(product.getUser());
+            new1.setBrand(product.getBrand());
+            return new1;
+        }).collect(Collectors.toList());
+        return products;
     }
 }

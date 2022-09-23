@@ -1,6 +1,7 @@
 package com.glamor.ecommerce.Controller;
 
 import com.glamor.ecommerce.Dto.UserRequest;
+import com.glamor.ecommerce.Dto.UserResponse;
 import com.glamor.ecommerce.Entities.User;
 import com.glamor.ecommerce.Service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class UserController {
     }
 
     @GetMapping("/get/{userId}")
-    public User getUserById(@PathVariable Long userId){
+    public UserResponse getUserById(@PathVariable Long userId){
         return userService.getUser(userId);
     }
 
