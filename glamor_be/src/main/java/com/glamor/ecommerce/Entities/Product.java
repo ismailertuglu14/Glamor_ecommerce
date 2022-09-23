@@ -30,14 +30,14 @@ public class Product {
     @Column(nullable = false)
     private String location;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_id")
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Brand brand;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     @ToString.Exclude

@@ -1,9 +1,10 @@
 package com.glamor.ecommerce.Service;
 
 import com.glamor.ecommerce.Dto.ProductRequest;
-import com.glamor.ecommerce.Entities.Brand;
+import com.glamor.ecommerce.Dto.ProductResponse;
 import com.glamor.ecommerce.Entities.Product;
 import com.glamor.ecommerce.Exceptions.BrandNotFoundException;
+import com.glamor.ecommerce.Exceptions.ProductNotFoundException;
 import com.glamor.ecommerce.Exceptions.UserNotFoundException;
 import com.glamor.ecommerce.Repository.BrandRepository;
 import com.glamor.ecommerce.Repository.ProductRepository;
@@ -31,5 +32,17 @@ public class ProductService {
         product.setBrand(brandRepository.findById(newProduct.getBrand_id()).orElseThrow(() -> new BrandNotFoundException("Brand not found.")));
         product.setUser(userRepository.findById(newProduct.getUser_id()).orElseThrow(() -> new UserNotFoundException("User not found.")));
         return productRepository.save(product);
+    }
+
+    public ProductResponse getProduct(Long productId) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product not found."));
+        ProductResponse response = new ProductResponse();
+        response.setTitle(product.getTitle());
+        response.setDescription(product.getDescrpition());
+        response.setPrice(product.getPrice());
+        response.setLocation(product.getLocation());
+        response.setUser(product.getUser());
+        response.setBrand(product.getBrand());
+        return response;
     }
 }

@@ -2,6 +2,7 @@ package com.glamor.ecommerce.Service;
 
 import com.glamor.ecommerce.Dto.UserRequest;
 import com.glamor.ecommerce.Entities.User;
+import com.glamor.ecommerce.Exceptions.UserNotFoundException;
 import com.glamor.ecommerce.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,9 @@ public class UserService {
         user.setPassword(newUser.getPassword());
         user.setAvatar(newUser.getAvatar());
         return userRepository.save(user);
+    }
+
+    public User getUser(Long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found."));
     }
 }

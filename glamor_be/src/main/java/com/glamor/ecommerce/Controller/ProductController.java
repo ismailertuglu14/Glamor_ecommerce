@@ -1,12 +1,10 @@
 package com.glamor.ecommerce.Controller;
 
 import com.glamor.ecommerce.Dto.ProductRequest;
+import com.glamor.ecommerce.Dto.ProductResponse;
 import com.glamor.ecommerce.Entities.Product;
 import com.glamor.ecommerce.Service.ProductService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -17,7 +15,12 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping
+    @GetMapping("/get/{productId}")
+    public ProductResponse getProductById(@PathVariable Long productId){
+        return productService.getProduct(productId);
+    }
+
+    @PostMapping("/create")
     public Product createProduct(@RequestBody ProductRequest product){
         return productService.saveProduct(product);
     }
