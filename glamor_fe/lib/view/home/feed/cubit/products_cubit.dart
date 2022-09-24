@@ -8,18 +8,17 @@ part 'products_state.dart';
 class ProductsCubit extends Cubit<ProductsState> {
   final IProductService productService;
   ProductsCubit(this.productService) : super(const ProductsState()) {
-    fetchAllProducts();
-    fetchAllCategories();
+    Future.wait([fetchAllProducts(), fetchAllCategories()]);
   }
 
-  void fetchAllProducts() async {
+  Future<void> fetchAllProducts() async {
     _changeLoading();
     final response = await productService.fetchAllProducts();
     emit(state.copyWith(products: response ?? []));
     _changeLoading();
   }
 
-  void fetchAllCategories() async {
+  Future<void> fetchAllCategories() async {
     final response = await productService.fetchAllCategories();
     emit(state.copyWith(categories: response));
   }
