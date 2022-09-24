@@ -1,1 +1,0 @@
-# Glamor Ecommerce Project
