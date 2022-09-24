@@ -1,37 +1,21 @@
-// ignore_for_file: depend_on_referenced_packages
-
-import 'dart:convert';
-
-import 'package:client/core/init/network/vexana_manager.dart';
+import 'package:client/view/_product/query/product_queries.dart';
+import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/feed/service/IProductService.dart';
-
-import '../model/product_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:vexana/vexana.dart';
 
 class ProductService extends IProductService {
-  static ProductService? _instance;
-
-  ProductService._() : super(VexanaManager.instance.networkManager);
-
-  static ProductService get instance {
-    return _instance ??= ProductService._();
-  }
+  ProductService(INetworkManager networkManager) : super(networkManager);
 
   @override
-  Future<List<Product>> getProducts() async {
-    final getProducts = await http
-        .get(Uri.parse('https://fakestoreapi.com/products'), headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-    });
-    final List responseBody = jsonDecode(getProducts.body);
+  Future<List<Product>?> fetchAllProducts({int count = 5}) async {
+    final response = await networkManager.send<Product, List<Product>>(
+      ProductServicePath.products.name,
+      parseModel: Product(),
+      method: RequestType.GET,
+      queryParameters:
+          Map.fromEntries([ProductQueries.limit.toMapEntry('$count')]),
+    );
 
-    return responseBody.map((e) => Product.fromJson(e)).toList();
-  }
-
-  @override
-  Future<List<Product>?> fetchAllProducts({int count = 5}) {
-    // TODO: implement fetchAllProducts
-    throw UnimplementedError();
+    return response.data;
   }
 }

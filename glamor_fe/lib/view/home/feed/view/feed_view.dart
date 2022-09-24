@@ -1,16 +1,12 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'package:client/core/base/base_view_model.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/view/_product/widgets/close/close_keyboard.dart';
 import 'package:client/view/home/feed/cubit/products_cubit.dart';
 import 'package:client/view/home/feed/widgets/product_card.dart';
-import 'package:client/view/home/feed/model/product_model.dart';
-import 'package:client/view/home/feed/service/product_notifier.dart';
-import 'package:client/view/home/feed/viewmodel/feed_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kartal/kartal.dart';
-import 'package:provider/provider.dart';
 
 class FeedView extends StatefulWidget {
   const FeedView({super.key});
@@ -18,35 +14,15 @@ class FeedView extends StatefulWidget {
   State<FeedView> createState() => _FeedViewState();
 }
 
-class _FeedViewState extends FeedViewModel {
+class _FeedViewState extends State<FeedView> with BaseViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        /*   appBar: AppBar(
-          leading: _buildProductLoading(),
-        ), */
-        body: _buildBody());
-  }
-
-  Widget _buildBody() {
-    final List<Product> products =
-        Provider.of<ProductNotifier>(context).productList;
-
-    return ChangeNotifierProvider(
-      create: (context) => ProductNotifier(),
-      child: Builder(
-        builder: (context) {
-          //  final provider = Provider.of<ProductNotifier>(context);
-          /* if (products.isEmpty) {
-            return _buildProductLoading();
-          } */
-          return _buildProductList(products);
-        },
-      ),
+      body: _buildBody(),
     );
   }
 
-  Widget _buildProductList(List<Product> list) {
+  Widget _buildBody() {
     return CloseKeyboard(
       widget: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8)
@@ -84,14 +60,8 @@ class _FeedViewState extends FeedViewModel {
             childAspectRatio: (itemWidth / itemHeight),
           ),
           itemCount: state.products?.length ?? 0,
-          itemBuilder: (context, index) {
-            final _item = state.products?[index];
-            if (_item != null) {
-              return ProductCard(product: state.products?[index]);
-            } else {
-              return const SizedBox.shrink();
-            }
-          },
+          itemBuilder: (context, index) =>
+              ProductCard(product: state.products?[index]),
         );
       },
     );
@@ -155,5 +125,6 @@ class _FeedViewState extends FeedViewModel {
         );
       },
     );
-  } */
+  }
+   */
 }

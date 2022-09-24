@@ -9,11 +9,11 @@ import 'package:client/view/authenticate/bloc/auth_bloc.dart';
 import 'package:client/view/authenticate/login/service/login_service.dart';
 import 'package:client/view/home/feed/cubit/products_cubit.dart';
 import 'package:client/view/home/feed/service/IProductService.dart';
+import 'package:client/view/home/feed/service/product_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:vexana/vexana.dart';
 
 import 'core/init/navigation/navigation_route.dart';
 import 'core/init/navigation/navigation_service.dart';
