@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'core/init/navigation/navigation_route.dart';
 import 'core/init/navigation/navigation_service.dart';
 
+//test comment
 void main() {
   initApp();
 
