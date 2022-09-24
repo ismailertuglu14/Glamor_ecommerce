@@ -3,10 +3,14 @@ import 'package:client/product/constants/duration_items.dart';
 import 'package:client/product/utility/border_radius.dart';
 import 'package:client/product/utility/custom_padding.dart';
 import 'package:client/view/_product/utility/validation.dart';
+import 'package:client/view/_product/widgets/close/close_keyboard.dart';
 import 'package:client/view/authenticate/login/viewmodel/login_view_model.dart';
 import 'package:client/view/home/home_test.dart';
 import 'package:flutter/material.dart';
 import 'package:client/core/extension/context_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import '../../bloc/auth_bloc.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -16,14 +20,21 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends LoginViewModel {
+  late AuthBloc? _authBloc;
+  @override
+  void initState() {
+    super.initState();
+    _authBloc = BlocProvider.of<AuthBloc>(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return _buildScreen(context);
   }
 
-  GestureDetector _buildScreen(BuildContext context) {
-    return GestureDetector(
-      onTap: () => setFocus(),
+  Widget _buildScreen(BuildContext context) {
+    return CloseKeyboard(
+        widget: GestureDetector(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
@@ -60,7 +71,7 @@ class _LoginViewState extends LoginViewModel {
           ),
         ),
       ),
-    );
+    ));
   }
 
   AnimatedContainer _isKeyboardOpenWidget(BuildContext context) {
@@ -101,23 +112,56 @@ class _LoginViewState extends LoginViewModel {
     );
   }
 
-  InkWell _buildButton(BuildContext context, String text, Function onComplete) {
-    return InkWell(
-      onTap: () async => isLoading == true ? null : fetchLoginService(),
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 20),
-        width: context.mediaQuery.size.width,
-        height: context.mediumValue,
-        decoration: BoxDecoration(
-          borderRadius: const CustomBorderRadius.radiusLow(),
-          color: context.theme.colorScheme.surface,
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: context.textTheme.headline5!
-                .copyWith(color: context.theme.colorScheme.primaryVariant),
+  Widget _buildButton(BuildContext context, String text, Function onComplete) {
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthError) {
+          print('Auth Error');
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+            'Error',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 30),
+          )));
+        } else if (state is AuthSuccessful) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.black,
+              content: Text(
+                'Login Successfull',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 30,
+                ),
+              )));
+        }
+      },
+      child: InkWell(
+        onTap: () async => context.watch<AuthBloc>() is AuthLoading == true
+            ? null
+            : _authBloc!.add(LoginEvent(
+                email: emailController.text,
+                password: passwordController.text)), //fetchLoginService(),
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 20),
+          width: context.mediaQuery.size.width,
+          height: context.mediumValue,
+          decoration: BoxDecoration(
+            borderRadius: const CustomBorderRadius.radiusLow(),
+            color: context.theme.colorScheme.surface,
           ),
+          child: context.watch<AuthBloc>().state is AuthLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Center(
+                  child: Text(
+                    text,
+                    style: context.textTheme.headline5!.copyWith(
+                        color: context.theme.colorScheme.primaryVariant),
+                  ),
+                ),
         ),
       ),
     );

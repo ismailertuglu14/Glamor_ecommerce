@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, deprecated_member_use
 
+import 'package:client/core/constants/app/app_constants.dart';
 import 'package:client/product/provider/user_provider.dart';
 import 'package:client/view/home/profile/viewmodel/profile_view_model.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _ProfileViewState extends ProfileViewModel {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CartDropper'),
+        title: Text(AppConstants.instance.APP_NAME),
         centerTitle: true,
         elevation: 1,
         backgroundColor: Theme.of(context).colorScheme.background,

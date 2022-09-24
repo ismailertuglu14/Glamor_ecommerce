@@ -4,7 +4,7 @@ import 'package:client/core/init/navigation/navigation_service.dart';
 import 'package:client/product/extension/string_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../home/feed/model/product_model.dart';
+import '../model/product_model.dart';
 
 class ProductCard extends StatefulWidget {
   final Product? product;
@@ -72,12 +72,18 @@ class _ProductCardState extends State<ProductCard> {
             ),
             /* Product Seller Location */
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 5).copyWith(bottom: 5),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
-                  Icon(Icons.location_on_outlined),
-                  Text('TUZLA, ISTANBUL'),
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 18,
+                  ),
+                  Text(
+                    'TUZLA, ISTANBUL',
+                    style: TextStyle(fontSize: 12),
+                  ),
                 ],
               ),
             ),

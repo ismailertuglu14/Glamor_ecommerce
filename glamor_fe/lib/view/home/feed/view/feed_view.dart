@@ -1,9 +1,15 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:client/core/constants/navigation/navigation_constants.dart';
-import 'package:client/view/_product/widgets/card/product_card.dart';
+import 'package:client/view/_product/widgets/close/close_keyboard.dart';
+import 'package:client/view/home/feed/cubit/products_cubit.dart';
+import 'package:client/view/home/feed/widgets/product_card.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/feed/service/product_notifier.dart';
 import 'package:client/view/home/feed/viewmodel/feed_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kartal/kartal.dart';
 import 'package:provider/provider.dart';
 
 class FeedView extends StatefulWidget {
@@ -15,7 +21,11 @@ class FeedView extends StatefulWidget {
 class _FeedViewState extends FeedViewModel {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildBody());
+    return Scaffold(
+        /*   appBar: AppBar(
+          leading: _buildProductLoading(),
+        ), */
+        body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -27,41 +37,18 @@ class _FeedViewState extends FeedViewModel {
       child: Builder(
         builder: (context) {
           //  final provider = Provider.of<ProductNotifier>(context);
-          if (products.isEmpty) {
+          /* if (products.isEmpty) {
             return _buildProductLoading();
-          }
+          } */
           return _buildProductList(products);
         },
       ),
-
-      // body: FutureBuilder<List<Product>>(
-      //   future: ProductService(VexanaManager.instance.networkManager)
-      //       .fetchProducts(),
-      //   builder: ((context, snapshot) {
-      //     if (!snapshot.hasData) {
-      //       return _buildProductLoading();
-      //     } else if (snapshot.hasData) {
-      //       var list = snapshot.data;
-      //       return _buildProductList(list!);
-      //     } else {
-      //       return _buildProductError();
-      //     }
-      //   }),
-      // ),
-      //.
-    );
-  }
-
-  Center _buildProductLoading() {
-    return const Center(
-      child: CircularProgressIndicator(),
     );
   }
 
   Widget _buildProductList(List<Product> list) {
-    return GestureDetector(
-      onTap: () => setFocus(),
-      child: Padding(
+    return CloseKeyboard(
+      widget: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8)
             .copyWith(bottom: 1),
         child: SingleChildScrollView(
@@ -71,7 +58,7 @@ class _FeedViewState extends FeedViewModel {
               _buildTextField(),
               _buildFiltersContainer(),
               _buildHorizontalContainer(),
-              _buildItemList(list),
+              _buildItemList(),
             ],
           ),
         ),
@@ -79,39 +66,35 @@ class _FeedViewState extends FeedViewModel {
     );
   }
 
-  Widget _buildItemList(List<Product> list) {
+  Widget _buildItemList() {
     var size = MediaQuery.of(context).size;
 
     /*24 is for notification bar on Android*/
     final double itemHeight = (size.height - kToolbarHeight - 100) / 2;
     final double itemWidth = size.width / 2;
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        crossAxisCount: 2,
-        childAspectRatio: (itemWidth / itemHeight),
-      ),
-      itemCount: list.length,
-      itemBuilder: (context, index) => ProductCard(product: list[index]),
+    return BlocBuilder<ProductsCubit, ProductsState>(
+      builder: (context, state) {
+        return GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
+            crossAxisCount: 2,
+            childAspectRatio: (itemWidth / itemHeight),
+          ),
+          itemCount: state.products?.length ?? 0,
+          itemBuilder: (context, index) {
+            final _item = state.products?[index];
+            if (_item != null) {
+              return ProductCard(product: state.products?[index]);
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        );
+      },
     );
-    // return MasonryGridView.builder(
-    //   physics: const NeverScrollableScrollPhysics(),
-    //   shrinkWrap: true,
-    //   padding: const EdgeInsets.only(top: 20),
-    //   mainAxisSpacing: 10,
-    //   crossAxisSpacing: 10,
-    //   itemCount: list.length,
-    //   itemBuilder: (context, index) {
-    //     return ProductCard(
-    //       product: list[index],
-    //     );
-    //   },
-    //   gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-    //       crossAxisCount: 2),
-    // );
   }
 
   Widget _buildFiltersContainer() {
@@ -158,4 +141,19 @@ class _FeedViewState extends FeedViewModel {
       ),
     );
   }
+
+/*   Widget _buildProductLoading() {
+    return BlocSelector<ProductsCubit, ProductsState, bool>(
+      selector: (state) {
+        return state.isLoading ?? false;
+      },
+      builder: (context, state) {
+        return AnimatedOpacity(
+          opacity: state ? 1 : 0,
+          duration: context.durationLow,
+          child: const Center(child: CircularProgressIndicator()),
+        );
+      },
+    );
+  } */
 }

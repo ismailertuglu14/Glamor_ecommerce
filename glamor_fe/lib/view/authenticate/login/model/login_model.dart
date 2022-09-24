@@ -17,6 +17,6 @@ class LoginModel extends INetworkModel<LoginModel> {
         "password": password,
       };
   factory LoginModel.fake() {
-    return LoginModel(email: 'eve.holt@reqres.in', password: 'cityslicka');
+    return LoginModel(email: 'ismailertgl@gmail.com', password: '123456');
   }
 }
