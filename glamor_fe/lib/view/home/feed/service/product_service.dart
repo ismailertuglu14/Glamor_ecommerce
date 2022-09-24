@@ -18,4 +18,12 @@ class ProductService extends IProductService {
 
     return response.data;
   }
+
+  @override
+  Future<List<String>?> fetchAllCategories() async {
+    final response = await networkManager.sendPrimitive(
+        '${ProductServicePath.products.name}/${ProductServicePath.categories.name}');
+
+    return response is List ? response.map((e) => '$e').toList() : null;
+  }
 }

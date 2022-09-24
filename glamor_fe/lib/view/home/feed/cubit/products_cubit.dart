@@ -9,6 +9,7 @@ class ProductsCubit extends Cubit<ProductsState> {
   final IProductService productService;
   ProductsCubit(this.productService) : super(const ProductsState()) {
     fetchAllProducts();
+    fetchAllCategories();
   }
 
   void fetchAllProducts() async {
@@ -16,6 +17,11 @@ class ProductsCubit extends Cubit<ProductsState> {
     final response = await productService.fetchAllProducts();
     emit(state.copyWith(products: response ?? []));
     _changeLoading();
+  }
+
+  void fetchAllCategories() async {
+    final response = await productService.fetchAllCategories();
+    emit(state.copyWith(categories: response));
   }
 
   void _changeLoading() {

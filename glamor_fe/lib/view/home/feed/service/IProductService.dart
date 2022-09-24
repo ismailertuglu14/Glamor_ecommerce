@@ -9,8 +9,9 @@ abstract class IProductService {
       : networkManager = networkManager;
 
   Future<List<Product>?> fetchAllProducts({int count = 5});
+  Future<List<String>?> fetchAllCategories();
   //Future<List<Product>> getProductByQuery(String query);
 
 }
 
-enum ProductServicePath { products }
+enum ProductServicePath { products, categories }
