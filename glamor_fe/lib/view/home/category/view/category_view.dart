@@ -28,47 +28,4 @@ class _CategoryViewState extends State<CategoryView> {
       ),
     );
   }
-
-  final List dummyData = const [
-    {
-      "icon": Icon(Icons.phone_android_rounded),
-      "title": Text('Phone'),
-    },
-    {
-      "icon": Icon(Icons.computer),
-      "title": Text('Electronic'),
-    },
-    {
-      "icon": Icon(Icons.motorcycle),
-      "title": Text('Motorcycle'),
-    },
-    {
-      "icon": Icon(Icons.sports_football),
-      "title": Text('Spor & Outdoor'),
-    },
-    {
-      "icon": Icon(Icons.phone_android_rounded),
-      "title": Text('Phone'),
-    },
-    {
-      "icon": Icon(Icons.phone_android_rounded),
-      "title": Text('Phone'),
-    },
-    {
-      "icon": Icon(Icons.phone_android_rounded),
-      "title": Text('Phone'),
-    },
-    {
-      "icon": Icon(Icons.phone_android_rounded),
-      "title": Text('Phone'),
-    },
-    {
-      "icon": Icon(Icons.phone_android_rounded),
-      "title": Text('Phone'),
-    },
-    {
-      "icon": Icon(Icons.phone_android_rounded),
-      "title": Text('Phone'),
-    },
-  ];
 }

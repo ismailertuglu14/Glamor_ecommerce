@@ -3,10 +3,13 @@
 import 'package:client/core/base/base_view_model.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/view/_product/widgets/close/close_keyboard.dart';
+import 'package:client/view/_product/widgets/loading.dart';
 import 'package:client/view/home/feed/cubit/products_cubit.dart';
 import 'package:client/view/home/feed/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kartal/kartal.dart';
+import 'package:provider/provider.dart';
 
 class FeedView extends StatefulWidget {
   const FeedView({super.key});
@@ -15,11 +18,30 @@ class FeedView extends StatefulWidget {
 }
 
 class _FeedViewState extends State<FeedView> with BaseViewModel {
+  final _scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  void _listenScroll(BuildContext context) {
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels + 40 >
+          _scrollController.position.maxScrollExtent) {
+        context.read<ProductsCubit>().fetchNewProducts();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBody(),
-    );
+    return Scaffold(body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -27,16 +49,26 @@ class _FeedViewState extends State<FeedView> with BaseViewModel {
       widget: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8)
             .copyWith(bottom: 1),
-        child: SingleChildScrollView(
-          key: const PageStorageKey<String>('feed'),
-          child: Column(
-            children: [
-              _buildTextField(),
-              _buildFiltersContainer(),
-              _buildHorizontalContainer(),
-              _buildItemList(),
-            ],
-          ),
+        child: BlocConsumer<ProductsCubit, ProductsState>(
+          listener: (context, state) {
+            if (state.isInitial) {
+              _listenScroll(context);
+            }
+          },
+          builder: (context, state) {
+            return SingleChildScrollView(
+              controller: _scrollController,
+              key: const PageStorageKey<String>('feed'),
+              child: Column(
+                children: [
+                  _buildTextField(),
+                  _buildFiltersContainer(),
+                  _buildHorizontalContainer(),
+                  _buildItemList(),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -44,10 +76,9 @@ class _FeedViewState extends State<FeedView> with BaseViewModel {
 
   Widget _buildItemList() {
     var size = MediaQuery.of(context).size;
-
-    /*24 is for notification bar on Android*/
     final double itemHeight = (size.height - kToolbarHeight - 100) / 2;
     final double itemWidth = size.width / 2;
+
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         return GridView.builder(
@@ -60,8 +91,17 @@ class _FeedViewState extends State<FeedView> with BaseViewModel {
             childAspectRatio: (itemWidth / itemHeight),
           ),
           itemCount: state.products?.length ?? 0,
-          itemBuilder: (context, index) =>
-              ProductCard(product: state.products?[index]),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                ProductCard(product: state.products?[index]),
+                state.products.isNotNullOrEmpty &&
+                        index == state.products!.length - 1
+                    ? const SizedBox.shrink() //Loading
+                    : const SizedBox.shrink()
+              ],
+            );
+          },
         );
       },
     );

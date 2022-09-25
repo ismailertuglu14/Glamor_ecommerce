@@ -8,7 +8,7 @@ part 'products_state.dart';
 class ProductsCubit extends Cubit<ProductsState> {
   final IProductService productService;
   ProductsCubit(this.productService) : super(const ProductsState()) {
-    Future.wait([fetchAllProducts(), fetchAllCategories()]);
+    initialComplete();
   }
 
   Future<void> fetchAllProducts() async {
@@ -25,5 +25,25 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   void _changeLoading() {
     emit(state.copyWith(isLoading: !(state.isLoading ?? false)));
+  }
+
+  /*  Lazy Loading fetch products*/
+  void fetchNewProducts() async {
+    if (state.isLoading ?? false) {
+      return;
+    }
+    _changeLoading();
+    int count = (state.productCount ?? 1);
+    final response = await productService.fetchAllProducts(count: ++count * 5);
+    _changeLoading();
+
+    emit(state.copyWith(products: response, productCount: count));
+  }
+
+  Future<void> initialComplete() async {
+    await Future.microtask(() {
+      emit(const ProductsState(isInitial: true));
+    });
+    await Future.wait([fetchAllProducts(), fetchAllCategories()]);
   }
 }

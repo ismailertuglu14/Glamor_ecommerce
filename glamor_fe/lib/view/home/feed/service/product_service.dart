@@ -7,7 +7,7 @@ class ProductService extends IProductService {
   ProductService(INetworkManager networkManager) : super(networkManager);
 
   @override
-  Future<List<Product>?> fetchAllProducts({int count = 5}) async {
+  Future<List<Product>?> fetchAllProducts({int count = 6}) async {
     final response = await networkManager.send<Product, List<Product>>(
       ProductServicePath.products.name,
       parseModel: Product(),
