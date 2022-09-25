@@ -2,7 +2,6 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:client/view/authenticate/login/model/login_model.dart';
-import 'package:client/view/authenticate/login/model/login_response_model.dart';
 import 'package:client/view/authenticate/login/service/login_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/core/init/navigation/navigation_service.dart';
 import 'package:client/product/extension/string_extension.dart';
@@ -7,23 +6,6 @@ import 'package:flutter/material.dart';
 
 import '../model/product_model.dart';
 
-/* class ProductCard extends StatefulWidget {
-  final Product? product;
-  const ProductCard({super.key, this.product});
-
-  @override
-  State<ProductCard> createState() => _ProductCardState();
-}
-
-class _ProductCardState extends State<ProductCard> {
-  @override
-  Widget build(BuildContext context) {
-    return buildImageInteractionCard(context);
-  }
-
-  
-}
- */
 class ProductCard extends StatelessWidget {
   final Product? product;
   const ProductCard({super.key, this.product});

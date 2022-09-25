@@ -18,6 +18,12 @@ class ProductsCubit extends Cubit<ProductsState> {
     _changeLoading();
   }
 
+  Future<void> fetchProductsByQuery() async {
+    _changeLoading();
+    // todo: Get Product List by selected category's query
+    _changeLoading();
+  }
+
   void _changeLoading() {
     emit(state.copyWith(isLoading: !(state.isLoading ?? false)));
   }

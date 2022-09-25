@@ -1,9 +1,12 @@
 // ignore_for_file: deprecated_member_use, avoid_print
+import 'package:client/core/constants/app/app_constants.dart';
+import 'package:client/core/constants/image/image_constants.dart';
 import 'package:client/product/utility/duration_items.dart';
 import 'package:client/product/utility/border_radius.dart';
 import 'package:client/product/utility/custom_padding.dart';
 import 'package:client/view/_product/widgets/close/close_keyboard.dart';
 import 'package:client/view/authenticate/login/viewmodel/login_view_model.dart';
+import 'package:client/view/authenticate/login/widgets/app_logo.dart';
 import 'package:client/view/authenticate/login/widgets/email_form_field.dart';
 import 'package:client/view/authenticate/login/widgets/password_form_field.dart';
 import 'package:client/view/authenticate/login/widgets/register_text.dart';
@@ -20,37 +23,44 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends LoginViewModel {
-  late AuthBloc? _authBloc;
-  @override
-  void initState() {
-    super.initState();
-    _authBloc = BlocProvider.of<AuthBloc>(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return _buildScreen(context);
   }
 
   Widget _buildScreen(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return CloseKeyboard(
         widget: GestureDetector(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Padding(
+        //  resizeToAvoidBottomInset: false,
+        body: Container(
+          height: height,
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xff0F0C29),
+              Color(0xff302B63),
+              Color(0xff24243E),
+            ],
+          )),
+          /* decoration: BoxDecoration(
+              gradient: linearGradient(180, ['#0F0C29', '#302B63', '#24243E'])), */
           padding: const CustomPadding.paddingNormal(),
           child: Form(
             key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Welcome to Glamor'),
+                const AppLogo(),
+                SizedBox(height: context.lowValue * 3),
                 EmailFormField(emailController),
                 // _buildTextFormField('Email', emailController, email),
                 PasswordFormField(passwordController),
                 _buildButton(context, 'Login'),
                 const RegisterText(),
-                _isKeyboardOpenWidget(context),
               ],
             ),
           ),
@@ -59,15 +69,15 @@ class _LoginViewState extends LoginViewModel {
     ));
   }
 
-  AnimatedContainer _isKeyboardOpenWidget(BuildContext context) {
+/*   AnimatedContainer _isKeyboardOpenWidget(BuildContext context) {
     return AnimatedContainer(
       height: WidgetsBinding.instance.window.viewInsets.bottom > 0
-          ? context.highValue * 1.5
+          ? context.highValue * 55.5
           : 0,
       duration: DurationItems.durationLow(),
       child: null,
     );
-  }
+  } */
 
   Widget _buildButton(BuildContext context, String text) {
     return BlocListener<AuthBloc, AuthState>(
@@ -98,7 +108,7 @@ class _LoginViewState extends LoginViewModel {
         onTap: () async => context.read<AuthBloc>() is AuthLoading == true
             ? null
             : formKey.currentState!.validate()
-                ? _authBloc!.add(LoginEvent(
+                ? authBloc!.add(LoginEvent(
                     email: emailController.text,
                     password: passwordController.text))
                 : null, //fetchLoginService(),
@@ -107,7 +117,7 @@ class _LoginViewState extends LoginViewModel {
           height: context.mediumValue,
           decoration: BoxDecoration(
             borderRadius: const CustomBorderRadius.radiusLow(),
-            color: context.theme.colorScheme.surface,
+            color: context.theme.colorScheme.onSecondary,
           ),
           child: context.watch<AuthBloc>().state is AuthLoading
               ? const Center(

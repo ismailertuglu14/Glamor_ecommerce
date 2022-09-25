@@ -8,8 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:vexana/vexana.dart';
 
-import '../../../../product/provider/user_provider.dart';
-
 class LoginService extends ILoginService {
   LoginService(INetworkManager manager) : super(manager);
 

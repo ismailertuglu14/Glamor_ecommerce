@@ -86,7 +86,7 @@ class _FeedViewState extends State<FeedView> with BaseViewModel {
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
+            mainAxisSpacing: 0,
             crossAxisCount: 2,
             childAspectRatio: (itemWidth / itemHeight),
           ),

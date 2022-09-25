@@ -2,6 +2,7 @@ import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/view/authenticate/auth/view/authenticate.dart';
 import 'package:client/view/authenticate/login/view/login_view.dart';
 import 'package:client/view/authenticate/onboard/view/onboard_view.dart';
+import 'package:client/view/authenticate/register/view/register_view.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
 import 'package:client/view/home/builder/view/home_wrapper.dart';
 import 'package:client/view/home/category/view/category_view.dart';
@@ -30,6 +31,9 @@ class NavigationRoute {
       // Login View
       case NavigationConstants.LOGIN_VIEW:
         return animatedNavigate(const LoginView());
+      case NavigationConstants.REGISTER_VIEW:
+        return normalNavigate(
+            const RegisterView(), NavigationConstants.REGISTER_VIEW);
       // Category View
       case NavigationConstants.CATEGORY:
         return normalNavigate(
@@ -37,10 +41,7 @@ class NavigationRoute {
       // Product View
       case NavigationConstants.PRODUCT_VIEW:
         if (args.arguments is Product) {
-          return normalNavigate(
-              ProductView(
-                product: args.arguments as Product,
-              ),
+          return normalNavigate(ProductView(product: args.arguments as Product),
               NavigationConstants.PRODUCT_VIEW);
         }
         throw Exception();

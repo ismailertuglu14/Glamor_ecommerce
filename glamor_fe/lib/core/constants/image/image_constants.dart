@@ -6,6 +6,6 @@ class ImageConstants {
   ImageConstants._init();
 
   String get loginShopping => toPng('login-shopping');
-
+  String get appLogo => toPng('Black-in-Jacket10');
   String toPng(String name) => 'assets/images/$name.png';
 }

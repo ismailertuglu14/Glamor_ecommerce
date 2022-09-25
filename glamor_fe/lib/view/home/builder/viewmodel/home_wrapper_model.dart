@@ -2,7 +2,7 @@ import 'package:client/view/home/chats/view/chats_view.dart';
 import 'package:client/view/home/feed/view/feed_view.dart';
 import 'package:client/view/home/my_ads/view/myads_view.dart';
 import 'package:client/view/home/profile/view/profile_view.dart';
-import 'package:client/view/home/sell/sell_view.dart';
+import 'package:client/view/home/sell/view/sell_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
