@@ -22,6 +22,7 @@ class _EmailFormFieldState extends State<EmailFormField> {
         cursorColor: Colors.black,
         keyboardType: TextInputType.emailAddress,
         decoration: const InputDecoration(
+            suffixIcon: Icon(Icons.mail_outline_outlined),
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,

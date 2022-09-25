@@ -1,15 +1,13 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, prefer_typing_uninitialized_variables
 
 import 'package:client/core/base/base_view_model.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/view/_product/widgets/close/close_keyboard.dart';
-import 'package:client/view/_product/widgets/loading.dart';
 import 'package:client/view/home/feed/cubit/products_cubit.dart';
 import 'package:client/view/home/feed/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
-import 'package:provider/provider.dart';
 
 class FeedView extends StatefulWidget {
   const FeedView({super.key});
@@ -18,10 +16,12 @@ class FeedView extends StatefulWidget {
 }
 
 class _FeedViewState extends State<FeedView> with BaseViewModel {
-  final _scrollController = ScrollController();
+  late final ScrollController _scrollController;
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _listenScroll(context);
   }
 
   @override

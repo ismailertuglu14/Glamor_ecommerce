@@ -6,6 +6,7 @@ import 'package:client/view/_product/widgets/close/close_keyboard.dart';
 import 'package:client/view/authenticate/login/viewmodel/login_view_model.dart';
 import 'package:client/view/authenticate/login/widgets/email_form_field.dart';
 import 'package:client/view/authenticate/login/widgets/password_form_field.dart';
+import 'package:client/view/authenticate/login/widgets/register_text.dart';
 import 'package:flutter/material.dart';
 import 'package:client/core/extension/context_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,12 +48,8 @@ class _LoginViewState extends LoginViewModel {
                 EmailFormField(emailController),
                 // _buildTextFormField('Email', emailController, email),
                 PasswordFormField(passwordController),
-
-                _buildButton(context, 'Login', () {
-                  /* Next Change */
-                  final form = formKey.currentState!;
-                  if (form.validate()) {}
-                }),
+                _buildButton(context, 'Login'),
+                const RegisterText(),
                 _isKeyboardOpenWidget(context),
               ],
             ),
@@ -72,7 +69,7 @@ class _LoginViewState extends LoginViewModel {
     );
   }
 
-  Widget _buildButton(BuildContext context, String text, Function onComplete) {
+  Widget _buildButton(BuildContext context, String text) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthError) {
@@ -106,7 +103,6 @@ class _LoginViewState extends LoginViewModel {
                     password: passwordController.text))
                 : null, //fetchLoginService(),
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 20),
           width: context.mediaQuery.size.width,
           height: context.mediumValue,
           decoration: BoxDecoration(
