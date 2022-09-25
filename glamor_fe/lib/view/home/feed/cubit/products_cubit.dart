@@ -18,11 +18,6 @@ class ProductsCubit extends Cubit<ProductsState> {
     _changeLoading();
   }
 
-  Future<void> fetchAllCategories() async {
-    final response = await productService.fetchAllCategories();
-    emit(state.copyWith(categories: response));
-  }
-
   void _changeLoading() {
     emit(state.copyWith(isLoading: !(state.isLoading ?? false)));
   }
@@ -44,6 +39,8 @@ class ProductsCubit extends Cubit<ProductsState> {
     await Future.microtask(() {
       emit(const ProductsState(isInitial: true));
     });
-    await Future.wait([fetchAllProducts(), fetchAllCategories()]);
+    await Future.wait([
+      fetchAllProducts(),
+    ]);
   }
 }

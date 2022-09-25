@@ -1,3 +1,4 @@
+import 'package:client/view/home/category/cubit/category_cubit.dart';
 import 'package:client/view/home/feed/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +13,7 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<ProductsCubit, ProductsState>(
+      body: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
           return ListView.builder(
             itemCount: state.categories?.length ?? 0,

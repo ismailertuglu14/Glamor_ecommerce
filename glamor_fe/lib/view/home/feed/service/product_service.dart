@@ -1,3 +1,4 @@
+import 'package:client/product/enums/product_serivce_enum.dart';
 import 'package:client/view/_product/query/product_queries.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/feed/service/IProductService.dart';
@@ -17,13 +18,5 @@ class ProductService extends IProductService {
     );
 
     return response.data;
-  }
-
-  @override
-  Future<List<String>?> fetchAllCategories() async {
-    final response = await networkManager.sendPrimitive(
-        '${ProductServicePath.products.name}/${ProductServicePath.categories.name}');
-
-    return response is List ? response.map((e) => '$e').toList() : null;
   }
 }

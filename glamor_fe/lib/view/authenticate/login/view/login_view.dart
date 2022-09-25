@@ -1,15 +1,14 @@
 // ignore_for_file: deprecated_member_use, avoid_print
-import 'package:client/product/constants/duration_items.dart';
+import 'package:client/product/utility/duration_items.dart';
 import 'package:client/product/utility/border_radius.dart';
 import 'package:client/product/utility/custom_padding.dart';
-import 'package:client/view/_product/utility/validation.dart';
 import 'package:client/view/_product/widgets/close/close_keyboard.dart';
 import 'package:client/view/authenticate/login/viewmodel/login_view_model.dart';
-import 'package:client/view/home/home_test.dart';
+import 'package:client/view/authenticate/login/widgets/email_form_field.dart';
+import 'package:client/view/authenticate/login/widgets/password_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:client/core/extension/context_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import '../../bloc/auth_bloc.dart';
 
 class LoginView extends StatefulWidget {
@@ -44,26 +43,15 @@ class _LoginViewState extends LoginViewModel {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Welcome to CartDropper'),
-                _buildTextFormField(
-                  'Email',
-                  emailController,
-                  email,
-                ),
-                _buildTextFormField(
-                  'Password',
-                  passwordController,
-                  password,
-                ),
+                const Text('Welcome to Glamor'),
+                EmailFormField(emailController),
+                // _buildTextFormField('Email', emailController, email),
+                PasswordFormField(passwordController),
+
                 _buildButton(context, 'Login', () {
                   /* Next Change */
                   final form = formKey.currentState!;
-                  if (form.validate()) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeTest()));
-                  }
+                  if (form.validate()) {}
                 }),
                 _isKeyboardOpenWidget(context),
               ],
@@ -81,34 +69,6 @@ class _LoginViewState extends LoginViewModel {
           : 0,
       duration: DurationItems.durationLow(),
       child: null,
-    );
-  }
-
-  Padding _buildTextFormField(
-    String hint,
-    TextEditingController controller,
-    String type,
-  ) {
-    return Padding(
-      padding: const CustomPadding.padVertLow(),
-      child: TextFormField(
-        controller: controller,
-        onChanged: (value) => type = value,
-        validator: (value) => type == 'email'
-            ? Validations.instance.validateEmail(value!)
-            : Validations.instance.validatePassword(value!),
-        cursorColor: Colors.black,
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            contentPadding:
-                const EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-            hintText: hint),
-      ),
     );
   }
 
@@ -138,11 +98,13 @@ class _LoginViewState extends LoginViewModel {
         }
       },
       child: InkWell(
-        onTap: () async => context.watch<AuthBloc>() is AuthLoading == true
+        onTap: () async => context.read<AuthBloc>() is AuthLoading == true
             ? null
-            : _authBloc!.add(LoginEvent(
-                email: emailController.text,
-                password: passwordController.text)), //fetchLoginService(),
+            : formKey.currentState!.validate()
+                ? _authBloc!.add(LoginEvent(
+                    email: emailController.text,
+                    password: passwordController.text))
+                : null, //fetchLoginService(),
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 20),
           width: context.mediaQuery.size.width,

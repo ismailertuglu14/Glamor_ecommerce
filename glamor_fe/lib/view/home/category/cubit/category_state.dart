@@ -1,10 +1,15 @@
 part of 'category_cubit.dart';
 
-abstract class CategoryState extends Equatable {
-  const CategoryState();
-
+class CategoryState extends Equatable {
+  const CategoryState({this.categories});
+  final List<String>? categories;
+  //final List<String>? subCategories;
   @override
-  List<Object> get props => [];
-}
+  List<Object?> get props => [categories];
 
-class CategoryInitial extends CategoryState {}
+  CategoryState copyWith({
+    List<String>? categories,
+  }) {
+    return CategoryState(categories: categories ?? this.categories);
+  }
+}

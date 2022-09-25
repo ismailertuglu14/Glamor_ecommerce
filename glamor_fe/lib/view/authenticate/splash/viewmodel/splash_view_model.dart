@@ -1,6 +1,6 @@
 import 'package:client/core/constants/enums/locale_keys_enum.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
-import 'package:client/product/constants/duration_items.dart';
+import 'package:client/product/utility/duration_items.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
 import 'package:client/view/authenticate/splash/viewmodel/cache_init.dart';
 import 'package:flutter/cupertino.dart';
