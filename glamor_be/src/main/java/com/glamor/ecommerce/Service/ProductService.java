@@ -3,12 +3,11 @@ package com.glamor.ecommerce.Service;
 import com.glamor.ecommerce.Dto.ProductRequest;
 import com.glamor.ecommerce.Dto.ProductResponse;
 import com.glamor.ecommerce.Entities.Product;
+import com.glamor.ecommerce.Entities.ProductSubcategory;
 import com.glamor.ecommerce.Exceptions.BrandNotFoundException;
 import com.glamor.ecommerce.Exceptions.ProductNotFoundException;
 import com.glamor.ecommerce.Exceptions.UserNotFoundException;
-import com.glamor.ecommerce.Repository.BrandRepository;
-import com.glamor.ecommerce.Repository.ProductRepository;
-import com.glamor.ecommerce.Repository.UserRepository;
+import com.glamor.ecommerce.Repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +18,15 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final BrandRepository brandRepository;
     private final UserRepository userRepository;
+    private final ProductSubcategoryRepository productSubcategoryRepository;
+    private final SubcategoryRepository subcategoryRepository;
 
-    public ProductService(ProductRepository productRepository, BrandRepository brandRepository, UserRepository userRepository) {
+    public ProductService(ProductRepository productRepository, BrandRepository brandRepository, UserRepository userRepository, ProductSubcategoryRepository productSubcategoryRepository, SubcategoryRepository subcategoryRepository) {
         this.productRepository = productRepository;
         this.brandRepository = brandRepository;
         this.userRepository = userRepository;
+        this.productSubcategoryRepository = productSubcategoryRepository;
+        this.subcategoryRepository = subcategoryRepository;
     }
 
     public Product saveProduct(ProductRequest newProduct){
@@ -34,6 +37,12 @@ public class ProductService {
         product.setLocation(newProduct.getLocation());
         product.setBrand(brandRepository.findById(newProduct.getBrand_id()).orElseThrow(() -> new BrandNotFoundException("Brand not found.")));
         product.setUser(userRepository.findById(newProduct.getUser_id()).orElseThrow(() -> new UserNotFoundException("User not found.")));
+        product.setProduct_subcategory(newProduct.getProduct_subcategory().stream().map(subcategory -> {
+            ProductSubcategory productSubcategory = new ProductSubcategory();
+            productSubcategory.setProduct(product);
+            productSubcategory.setSubcategory(subcategoryRepository.findById(subcategory).orElse(null));
+            return productSubcategory;
+        }).collect(Collectors.toList()));
         return productRepository.save(product);
     }
 
@@ -46,6 +55,7 @@ public class ProductService {
         response.setLocation(product.getLocation());
         response.setUser(product.getUser());
         response.setBrand(product.getBrand());
+        response.setSubcategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory()).collect(Collectors.toList()));
         return response;
     }
 

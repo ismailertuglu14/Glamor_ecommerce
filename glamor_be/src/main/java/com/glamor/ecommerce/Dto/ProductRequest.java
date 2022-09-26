@@ -12,4 +12,5 @@ public class ProductRequest {
     private String location;
     private Long brand_id;
     private Long user_id;
+    private List<Long> product_subcategory;
 }

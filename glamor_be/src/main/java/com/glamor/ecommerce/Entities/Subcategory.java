@@ -19,7 +19,7 @@ public class Subcategory {
         @Column(nullable = false)
         private String title;
 
-        @ManyToOne(fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "category_id")
         @JsonIgnore
         @ToString.Exclude

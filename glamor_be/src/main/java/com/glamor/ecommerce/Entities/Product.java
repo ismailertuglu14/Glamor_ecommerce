@@ -44,7 +44,7 @@ public class Product {
     @EqualsAndHashCode.Exclude
     private User user;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
