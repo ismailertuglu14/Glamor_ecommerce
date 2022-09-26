@@ -4,8 +4,6 @@ import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
-import '../viewmodel/product_view_model.dart';
-
 class ProductView extends StatefulWidget {
   final Product product;
   const ProductView({super.key, required this.product});
@@ -13,7 +11,7 @@ class ProductView extends StatefulWidget {
   State<ProductView> createState() => _ProductViewState();
 }
 
-class _ProductViewState extends ProductViewModel {
+class _ProductViewState extends State<ProductView> {
   @override
   Widget build(BuildContext context) {
     return _buildScaffold();
@@ -47,7 +45,7 @@ class _ProductViewState extends ProductViewModel {
         width: width,
         height: height,
         children: [
-          //! Temporary method
+          //! Temporary dummy data
           Image.network(
             widget.product.image.toString(),
             fit: BoxFit.fill,

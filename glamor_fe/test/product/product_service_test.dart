@@ -22,4 +22,9 @@ void main() {
     final response = await categoryService.fetchAllCategories();
     expect(response, isNotEmpty);
   });
+  test('Get products by query', () async {
+    Map<String, dynamic> newMap = {"limit": 5};
+    final response = await productService.getProductsByQuery(newMap);
+    expect(response, isNotNull);
+  });
 }

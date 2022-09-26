@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/init/cache/locale_manager.dart';
+import '../widgets/profile_card.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -35,16 +36,23 @@ class _ProfileViewState extends ProfileViewModel {
       padding: const EdgeInsets.only(top: 8.0),
       child: Column(
         children: [
-          ProfileCard(context),
+          const ProfileCard(),
           SettingsCard(context,
               icon: Icons.shopping_bag_outlined,
               path: '',
-              title: 'Buy Packages'),
+              title: 'Buy Packages',
+              tooltip: 'Packages'),
 
           SettingsCard(context,
-              icon: Icons.privacy_tip_outlined, path: '', title: 'Privacy'),
+              icon: Icons.privacy_tip_outlined,
+              path: '',
+              title: 'Privacy',
+              tooltip: 'Privacy'),
           SettingsCard(context,
-              icon: Icons.group, path: '', title: 'Help & Support'),
+              icon: Icons.group,
+              path: '',
+              title: 'Help & Support',
+              tooltip: 'Help & Support'),
 
           // Logout Function Widget
           const Expanded(
@@ -63,6 +71,7 @@ class _ProfileViewState extends ProfileViewModel {
   Widget SettingsCard(BuildContext context,
       {required IconData icon,
       required String title,
+      String? tooltip,
       String? path,
       Function? func}) {
     return GestureDetector(
@@ -73,32 +82,14 @@ class _ProfileViewState extends ProfileViewModel {
         child: ListTile(
           leading: Icon(icon),
           title: Text(title),
-          trailing: func == null ? const Icon(Icons.arrow_forward_ios) : null,
+          trailing: func == null
+              ? IconButton(
+                  onPressed: () {},
+                  tooltip: tooltip,
+                  icon: const Icon(Icons.arrow_forward_ios),
+                )
+              : null,
         ),
-      ),
-    );
-  }
-
-/* Widgets*/
-  Card ProfileCard(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: const CircleAvatar(
-          backgroundImage: NetworkImage(
-              'https://lh3.googleusercontent.com/ogw/AOh-ky0FbHqdSwVlRuYrWf-hkvNJkDfbMnenWPJcrge6YQ=s32-c-mo'),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('İsmail Ertuglu'),
-            Text(
-              'ismailertgl@gmail.com',
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.primaryVariant),
-            ),
-          ],
-        ),
-        trailing: const Icon(Icons.arrow_forward_ios),
       ),
     );
   }

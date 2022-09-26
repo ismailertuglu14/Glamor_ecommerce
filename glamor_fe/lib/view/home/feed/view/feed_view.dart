@@ -144,7 +144,7 @@ class _FeedViewState extends State<FeedView> with BaseViewModel {
         hintStyle: const TextStyle(letterSpacing: 3),
         suffixIcon: GestureDetector(
           onTap: () {
-            //TODO: Clear text stuffs
+            //todo: Clear text stuffs
           },
           child: const Icon(Icons.close),
         ),

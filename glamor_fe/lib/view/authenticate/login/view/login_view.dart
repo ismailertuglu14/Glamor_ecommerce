@@ -1,7 +1,4 @@
 // ignore_for_file: deprecated_member_use, avoid_print
-import 'package:client/core/constants/app/app_constants.dart';
-import 'package:client/core/constants/image/image_constants.dart';
-import 'package:client/product/utility/duration_items.dart';
 import 'package:client/product/utility/border_radius.dart';
 import 'package:client/product/utility/custom_padding.dart';
 import 'package:client/view/_product/widgets/close/close_keyboard.dart';

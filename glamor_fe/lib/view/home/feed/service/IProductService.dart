@@ -9,6 +9,5 @@ abstract class IProductService {
       : networkManager = networkManager;
 
   Future<List<Product>?> fetchAllProducts({int count = 5});
-  //Future<List<Product>> getProductByQuery(String query);
-
+  Future<List<Product>?> getProductsByQuery(Map<String, dynamic> queries);
 }

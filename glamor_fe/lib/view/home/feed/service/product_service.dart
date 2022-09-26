@@ -19,4 +19,16 @@ class ProductService extends IProductService {
 
     return response.data;
   }
+
+  @override
+  Future<List<Product>?> getProductsByQuery(
+      Map<String, dynamic> queries) async {
+    final response = await networkManager.send<Product, List<Product>>(
+        ProductServicePath.products.name,
+        parseModel: Product(),
+        method: RequestType.GET,
+        queryParameters: queries);
+
+    return response.data;
+  }
 }
