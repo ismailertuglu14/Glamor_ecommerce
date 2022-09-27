@@ -6,6 +6,8 @@ import com.glamor.ecommerce.Entities.Category;
 import com.glamor.ecommerce.Service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/category")
 public class CategoryController {
@@ -23,5 +25,10 @@ public class CategoryController {
     @PostMapping("/create")
     public Category createCategory(@RequestBody CategoryRequest categoryRequest){
         return categoryService.saveCategory(categoryRequest);
+    }
+
+    @GetMapping("/all")
+    public List<Category> getAllCategories(){
+        return categoryService.getCategories();
     }
 }

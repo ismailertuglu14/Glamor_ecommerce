@@ -7,6 +7,8 @@ import com.glamor.ecommerce.Exceptions.UserNotFoundException;
 import com.glamor.ecommerce.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -19,6 +21,7 @@ public class UserService {
         User user = new User();
         user.setName(newUser.getName());
         user.setLastname(newUser.getLastname());
+        user.setEmail(newUser.getEmail());
         user.setPassword(newUser.getPassword());
         user.setAvatar(newUser.getAvatar());
         return userRepository.save(user);
@@ -29,9 +32,11 @@ public class UserService {
         UserResponse response = new UserResponse();
         response.setName(user.getName());
         response.setLastname(user.getLastname());
+        response.setEmail(user.getEmail());
         response.setAvatar(user.getAvatar());
         response.setPassword(user.getPassword());
         response.setProducts(user.getProduct());
+        response.setFavorites(user.getFavorite().stream().map(favorite -> favorite.getProduct()).collect(Collectors.toList()));
         return response;
     }
 }

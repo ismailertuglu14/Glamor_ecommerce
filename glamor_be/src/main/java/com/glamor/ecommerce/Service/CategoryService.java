@@ -8,6 +8,9 @@ import com.glamor.ecommerce.Repository.ProductRepository;
 import com.glamor.ecommerce.Repository.SubcategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
@@ -32,5 +35,9 @@ public class CategoryService {
         response.setTitle(category.getTitle());
         response.setSubcategories(subcategoryRepository.findSubcategoriesByCategoryId(categoryId));
         return response;
+    }
+
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
     }
 }
