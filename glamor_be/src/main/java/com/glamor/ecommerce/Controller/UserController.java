@@ -4,7 +4,6 @@ import com.glamor.ecommerce.Dto.UserRequest;
 import com.glamor.ecommerce.Dto.UserResponse;
 import com.glamor.ecommerce.Entities.User;
 import com.glamor.ecommerce.Service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

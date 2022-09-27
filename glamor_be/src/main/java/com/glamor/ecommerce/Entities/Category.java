@@ -1,9 +1,6 @@
 package com.glamor.ecommerce.Entities;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 

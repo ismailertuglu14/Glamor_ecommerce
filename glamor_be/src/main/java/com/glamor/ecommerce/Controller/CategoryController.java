@@ -2,7 +2,6 @@ package com.glamor.ecommerce.Controller;
 
 import com.glamor.ecommerce.Dto.CategoryRequest;
 import com.glamor.ecommerce.Dto.CategoryResponse;
-import com.glamor.ecommerce.Dto.ProductResponse;
 import com.glamor.ecommerce.Entities.Category;
 import com.glamor.ecommerce.Service.CategoryService;
 import org.springframework.web.bind.annotation.*;

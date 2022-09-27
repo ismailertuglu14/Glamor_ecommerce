@@ -15,7 +15,7 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
@@ -23,7 +23,7 @@ public class Like {
     @EqualsAndHashCode.Exclude
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id",nullable = false)
     @JsonIgnore

@@ -19,4 +19,5 @@ public class ProductResponse {
     private User user;
     private List<Subcategory> subcategories;
     private Set<Category> categories;
+    private int total_like;
 }

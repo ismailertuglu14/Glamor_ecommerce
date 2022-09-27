@@ -55,6 +55,7 @@ public class ProductService {
         response.setBrand(product.getBrand());
         response.setSubcategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory()).collect(Collectors.toList()));
         response.setCategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory().getCategory()).collect(Collectors.toSet()));
+        response.setTotal_like(product.getLikes().size());
         return response;
     }
 
@@ -70,6 +71,7 @@ public class ProductService {
             new1.setSubcategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory()).collect(Collectors.toList()));
             new1.setCategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory().getCategory()).collect(Collectors.
         toSet()));
+            new1.setTotal_like(product.getLikes().size());
             return new1;
         }).collect(Collectors.toList());
         return products;

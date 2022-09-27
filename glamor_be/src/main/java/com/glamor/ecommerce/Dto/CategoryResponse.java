@@ -1,6 +1,5 @@
 package com.glamor.ecommerce.Dto;
 
-import com.glamor.ecommerce.Entities.Product;
 import com.glamor.ecommerce.Entities.Subcategory;
 import lombok.Data;
 

@@ -2,9 +2,7 @@ package com.glamor.ecommerce.Controller;
 
 import com.glamor.ecommerce.Dto.BrandRequest;
 import com.glamor.ecommerce.Dto.BrandResponse;
-import com.glamor.ecommerce.Dto.UserRequest;
 import com.glamor.ecommerce.Entities.Brand;
-import com.glamor.ecommerce.Entities.User;
 import com.glamor.ecommerce.Service.BrandService;
 import org.springframework.web.bind.annotation.*;
 
