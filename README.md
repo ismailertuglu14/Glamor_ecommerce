@@ -9,6 +9,7 @@ Glamor e-ticaret projesinin açık kaynak kodudur.
   /api/v1/user/${userId}
   /api/v1/category/${categoryId}
   /api/v1/brand/${brandId}
+  /api/v1/like/${likeId}
 ```
 
 #### Öğeyi gönderme metodları (POST)
@@ -19,6 +20,7 @@ Glamor e-ticaret projesinin açık kaynak kodudur.
   /api/v1/brand/create
   /api/v1/category/create
   /api/v1/subcategory/create
+  /api/v1/like/create
 ```
 
 Product Request
@@ -31,6 +33,44 @@ Product Request
   "brand_id":0,
   "user_id":0,
   "product_subcategory":[0,1,2..]
+}
+```
+
+Product Response
+```JSON
+{
+    "title": "example",
+    "description": "example",
+    "price": 999.99,
+    "location": "example",
+    "brand": {
+        "id": 1,
+        "name": "example"
+    },
+    "user": {
+        "id": 1,
+        "name": "example",
+        "lastname": "example",
+        "password": "example",
+        "avatar": "/avatars/example_1.jpg"
+    },
+    "subcategories": [
+        {
+            "id": 1,
+            "title": "example"
+        },
+        {
+            "id": 2,
+            "title": "example"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "title": "example"
+        }
+    ],
+    "total_like": 0
 }
 ```
 
@@ -63,5 +103,13 @@ Subcategory Request
 {
   "title":"example",
   "category_id":0
+}
+```
+
+Like Request
+```JSON
+{
+  "user_id":0,
+  "product_id":0
 }
 ```
