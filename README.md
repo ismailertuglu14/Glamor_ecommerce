@@ -21,6 +21,7 @@ Glamor e-ticaret projesinin açık kaynak kodudur.
   /api/v1/category/create
   /api/v1/subcategory/create
   /api/v1/like/create
+  /api/v1/favorite/create
 ```
 
 Product Request
@@ -51,6 +52,7 @@ Product Response
         "id": 1,
         "name": "example",
         "lastname": "example",
+        "email":"exmpl@domain.com",
         "password": "example",
         "avatar": "/avatars/example_1.jpg"
     },
@@ -79,6 +81,7 @@ User Request
 {
   "name":"example",
   "lastname":"example",
+  "email":"exmpl@domain.com",
   "password":"example",
   "avatar":"/images/avatar_1.jpg"
 }
@@ -107,6 +110,14 @@ Subcategory Request
 ```
 
 Like Request
+```JSON
+{
+  "user_id":0,
+  "product_id":0
+}
+```
+
+Favorite Request
 ```JSON
 {
   "user_id":0,
