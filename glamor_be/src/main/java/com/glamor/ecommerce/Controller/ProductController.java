@@ -17,12 +17,12 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/get/products")
+    @GetMapping("/all")
     public List<ProductResponse> getAllProducts(){
         return productService.getProducts();
     }
 
-    @GetMapping("/get/{productId}")
+    @GetMapping("/{productId}")
     public ProductResponse getProductById(@PathVariable Long productId){
         return productService.getProduct(productId);
     }

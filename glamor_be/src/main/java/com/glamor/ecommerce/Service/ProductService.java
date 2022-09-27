@@ -18,14 +18,12 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final BrandRepository brandRepository;
     private final UserRepository userRepository;
-    private final ProductSubcategoryRepository productSubcategoryRepository;
     private final SubcategoryRepository subcategoryRepository;
 
-    public ProductService(ProductRepository productRepository, BrandRepository brandRepository, UserRepository userRepository, ProductSubcategoryRepository productSubcategoryRepository, SubcategoryRepository subcategoryRepository) {
+    public ProductService(ProductRepository productRepository, BrandRepository brandRepository, UserRepository userRepository, SubcategoryRepository subcategoryRepository) {
         this.productRepository = productRepository;
         this.brandRepository = brandRepository;
         this.userRepository = userRepository;
-        this.productSubcategoryRepository = productSubcategoryRepository;
         this.subcategoryRepository = subcategoryRepository;
     }
 
@@ -56,6 +54,7 @@ public class ProductService {
         response.setUser(product.getUser());
         response.setBrand(product.getBrand());
         response.setSubcategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory()).collect(Collectors.toList()));
+        response.setCategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory().getCategory()).collect(Collectors.toSet()));
         return response;
     }
 
@@ -68,6 +67,9 @@ public class ProductService {
             new1.setLocation(product.getLocation());
             new1.setUser(product.getUser());
             new1.setBrand(product.getBrand());
+            new1.setSubcategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory()).collect(Collectors.toList()));
+            new1.setCategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory().getCategory()).collect(Collectors.
+        toSet()));
             return new1;
         }).collect(Collectors.toList());
         return products;

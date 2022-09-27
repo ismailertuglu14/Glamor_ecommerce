@@ -17,7 +17,7 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @GetMapping("/get/{brandId}")
+    @GetMapping("/{brandId}")
     public BrandResponse getBrandById(@PathVariable Long brandId){
         return brandService.getBrand(brandId);
     }

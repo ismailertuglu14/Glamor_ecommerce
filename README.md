@@ -4,11 +4,11 @@ Glamor e-ticaret projesinin açık kaynak kodudur.
 #### Öğeyi getirme metodları (GET)
 
 ```http
-  /api/v1/product/get/products
-  /api/v1/product/get/${productId}
-  /api/v1/user/get/${userId}
-  /api/v1/category/get/${categoryId}
-  /api/v1/brand/get/${brandId}
+  /api/v1/product/all
+  /api/v1/product/${productId}
+  /api/v1/user/${userId}
+  /api/v1/category/${categoryId}
+  /api/v1/brand/${brandId}
 ```
 
 #### Öğeyi gönderme metodları (POST)

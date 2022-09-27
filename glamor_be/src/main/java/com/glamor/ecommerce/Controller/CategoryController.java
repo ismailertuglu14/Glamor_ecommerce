@@ -16,7 +16,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/get/{categoryId}")
+    @GetMapping("/{categoryId}")
     public CategoryResponse getCategoryById(@PathVariable Long categoryId){
         return categoryService.getCategory(categoryId);
     }
