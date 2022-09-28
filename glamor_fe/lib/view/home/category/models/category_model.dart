@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:vexana/vexana.dart';
 
 class Category extends INetworkModel<Category> {

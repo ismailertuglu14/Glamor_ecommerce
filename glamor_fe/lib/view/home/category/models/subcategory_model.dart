@@ -40,9 +40,9 @@ class Subcategories {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['title'] = title;
-    return _data;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    return data;
   }
 }
