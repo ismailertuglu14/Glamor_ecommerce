@@ -1,0 +1,10 @@
+### AUTH STATE LIFECYCLE ###
+[] Login Api Tamamnlandığında State yönetimini 0 dan yaz.
+[] 
+[]
+
+### FEED VIEW ###
+[] 
+[]
+[]
+
