@@ -12,7 +12,7 @@ void main() {
     productService = ProductService(NetworkManager(
         options: BaseOptions(baseUrl: 'http://localhost:8080/api/v1')));
     categoryService = CategoryService(NetworkManager(
-        options: BaseOptions(baseUrl: 'https://fakestoreapi.com/')));
+        options: BaseOptions(baseUrl: 'http://localhost:8080/api/v1')));
   });
   test('fetch lazy products test', () async {
     final response = await productService.fetchAllProducts();
@@ -25,6 +25,11 @@ void main() {
   test('Get products by query', () async {
     Map<String, dynamic> newMap = {"limit": 5};
     final response = await productService.getProductsByQuery(newMap);
+    expect(response, isNotNull);
+  });
+
+  test('Get subcategory by category id', () async {
+    final response = await categoryService.fetchSubcategories(id: 1);
     expect(response, isNotNull);
   });
 }
