@@ -37,4 +37,4 @@ abstract class ChatsViewModel extends State<ChatsView>
 }
 
 // ignore: constant_identifier_names
-enum MyTabViews { Messages, Favorites }
+enum MyTabViews { Selling, Buying }

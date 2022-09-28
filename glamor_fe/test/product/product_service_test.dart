@@ -10,7 +10,7 @@ void main() {
   late ICategoryService categoryService;
   setUp(() {
     productService = ProductService(NetworkManager(
-        options: BaseOptions(baseUrl: 'https://fakestoreapi.com/')));
+        options: BaseOptions(baseUrl: 'http://localhost:8080/api/v1')));
     categoryService = CategoryService(NetworkManager(
         options: BaseOptions(baseUrl: 'https://fakestoreapi.com/')));
   });

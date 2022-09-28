@@ -44,24 +44,24 @@ class _ProductViewState extends State<ProductView> {
       child: ImageSlideshow(
         width: width,
         height: height,
-        children: [
+        children: const [
           //! Temporary dummy data
-          Image.network(
-            widget.product.image.toString(),
-            fit: BoxFit.fill,
-          ),
-          Image.network(
-            widget.product.image.toString(),
-            fit: BoxFit.fill,
-          ),
-          Image.network(
-            widget.product.image.toString(),
-            fit: BoxFit.fill,
-          ),
-          Image.network(
-            widget.product.image.toString(),
-            fit: BoxFit.fill,
-          ),
+          // Image.network(
+          //   widget.product.image.toString(),
+          //   fit: BoxFit.fill,
+          // ),
+          // Image.network(
+          //   widget.product.image.toString(),
+          //   fit: BoxFit.fill,
+          // ),
+          // Image.network(
+          //   widget.product.image.toString(),
+          //   fit: BoxFit.fill,
+          // ),
+          // Image.network(
+          //   widget.product.image.toString(),
+          //   fit: BoxFit.fill,
+          // ),
         ],
       ),
     );

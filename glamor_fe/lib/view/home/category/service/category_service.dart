@@ -6,9 +6,11 @@ class CategoryService extends ICategoryService {
   CategoryService(INetworkManager networkManager) : super(networkManager);
   @override
   Future<List<String>?> fetchAllCategories() async {
-    final response = await networkManager.sendPrimitive(
-        '${ProductServicePath.products.name}/${ProductServicePath.categories.name}');
+    final response = await networkManager
+        .sendPrimitive('${ProductServicePath.category.name}/all');
 
-    return response is List ? response.map((e) => '$e').toList() : null;
+    return response is List
+        ? response.map((e) => '${e['title']}').toList()
+        : null;
   }
 }

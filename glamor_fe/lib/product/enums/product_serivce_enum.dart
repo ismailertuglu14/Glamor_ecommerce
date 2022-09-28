@@ -1,1 +1,1 @@
-enum ProductServicePath { products, categories }
+enum ProductServicePath { products, category }
