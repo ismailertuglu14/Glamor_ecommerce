@@ -21,7 +21,7 @@ class UserProvider with ChangeNotifier {
   }
 
   getToken() {
-    String value = LocaleManager.instance.getStringValue(PreferencesKeys
+    String? value = LocaleManager.instance.getStringValue(PreferencesKeys
         .TOKEN); // Locale de kayıtlı olan token değerini getirecek.
     setToken = value;
   }

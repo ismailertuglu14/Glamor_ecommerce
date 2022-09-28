@@ -14,7 +14,7 @@ class _FavoritesViewState extends State<FavoritesView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text('Favorites'),
+            Text('There are no conservation yet.'),
           ],
         ),
       ),

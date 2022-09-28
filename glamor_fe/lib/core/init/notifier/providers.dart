@@ -4,6 +4,10 @@ import 'package:client/product/provider/user_provider.dart';
 import 'package:client/view/authenticate/bloc/auth_bloc.dart';
 import 'package:client/view/authenticate/login/service/login_service.dart';
 import 'package:client/view/home/builder/viewmodel/home_wrapper_model.dart';
+import 'package:client/view/home/category/cubit/category_cubit.dart';
+import 'package:client/view/home/category/service/category_service.dart';
+import 'package:client/view/home/feed/cubit/products_cubit.dart';
+import 'package:client/view/home/feed/service/product_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -32,5 +36,21 @@ class ApplicationProvider {
         create: (context) =>
             LoginService(VexanaManager.instance.networkManager)),
     Provider.value(value: NavigationService.instance)
+  ];
+  dynamic blocProviders = [
+    BlocProvider<AuthBloc>(create: (context) {
+      return AuthBloc(
+        loginService: LoginService(VexanaManager.instance.networkManager),
+        context: context,
+      );
+    }),
+    BlocProvider(
+      create: (context) =>
+          ProductsCubit(ProductService(VexanaManager.instance.networkManager)),
+    ),
+    BlocProvider(
+      create: (context) =>
+          CategoryCubit(CategoryService(VexanaManager.instance.networkManager)),
+    ),
   ];
 }

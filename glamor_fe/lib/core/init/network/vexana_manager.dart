@@ -8,8 +8,7 @@ class VexanaManager {
     return _instace!;
   }
 
-  static const String _baseUrl = 'https://multi-grocery.herokuapp.com/api';
-
+  static const String _baseUrl = 'http://192.168.58.1:8080/api/v1/';
   VexanaManager._init();
 
   INetworkManager networkManager = NetworkManager(

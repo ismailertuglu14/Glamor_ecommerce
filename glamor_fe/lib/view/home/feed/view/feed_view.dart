@@ -1,10 +1,9 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, prefer_typing_uninitialized_variables
 
-import 'package:client/core/base/base_view_model.dart';
-import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/view/_product/widgets/close/close_keyboard.dart';
 import 'package:client/view/home/feed/cubit/products_cubit.dart';
 import 'package:client/view/home/feed/widgets/product_card.dart';
+import 'package:client/view/home/feed/widgets/search_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
@@ -15,7 +14,7 @@ class FeedView extends StatefulWidget {
   State<FeedView> createState() => _FeedViewState();
 }
 
-class _FeedViewState extends State<FeedView> with BaseViewModel {
+class _FeedViewState extends State<FeedView> {
   late final ScrollController _scrollController;
   @override
   void initState() {
@@ -41,34 +40,34 @@ class _FeedViewState extends State<FeedView> with BaseViewModel {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildBody());
+    return _buildScaffold();
   }
 
-  Widget _buildBody() {
+  Widget _buildScaffold() {
     return CloseKeyboard(
       widget: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8)
-            .copyWith(bottom: 1),
-        child: BlocConsumer<ProductsCubit, ProductsState>(
-          listener: (context, state) {
-            if (state.isInitial) {
-              _listenScroll(context);
-            }
-          },
-          builder: (context, state) {
-            return SingleChildScrollView(
-              controller: _scrollController,
-              key: const PageStorageKey<String>('feed'),
-              child: Column(
-                children: [
-                  _buildTextField(),
-                  _buildFiltersContainer(),
-                  _buildHorizontalContainer(),
-                  _buildItemList(),
-                ],
-              ),
-            );
-          },
+        padding: context.horizontalPaddingLow,
+        child: Scaffold(
+          appBar: SearchAppbar(),
+          body: BlocConsumer<ProductsCubit, ProductsState>(
+            listener: (context, state) {
+              if (state.isInitial) {
+                _listenScroll(context);
+              }
+            },
+            builder: (context, state) {
+              return SingleChildScrollView(
+                controller: _scrollController,
+                key: const PageStorageKey<String>('feed'),
+                child: Column(
+                  children: [
+                    _buildHorizontalContainer(),
+                    _buildItemList(),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -107,23 +106,6 @@ class _FeedViewState extends State<FeedView> with BaseViewModel {
     );
   }
 
-  Widget _buildFiltersContainer() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          GestureDetector(
-            onTap: () {
-              navigation.navigateToPage(path: NavigationConstants.CATEGORY);
-            },
-            child: const Icon(Icons.format_list_numbered_rtl_sharp),
-          ),
-        ],
-      ),
-    );
-  }
-
   Wrap _buildHorizontalContainer() {
     return Wrap(
       children: [
@@ -134,21 +116,6 @@ class _FeedViewState extends State<FeedView> with BaseViewModel {
           ),
         ),
       ],
-    );
-  }
-
-  TextField _buildTextField() {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: 'Search',
-        hintStyle: const TextStyle(letterSpacing: 3),
-        suffixIcon: GestureDetector(
-          onTap: () {
-            //todo: Clear text stuffs
-          },
-          child: const Icon(Icons.close),
-        ),
-      ),
     );
   }
 

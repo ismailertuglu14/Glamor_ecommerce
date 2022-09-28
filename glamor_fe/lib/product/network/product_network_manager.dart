@@ -1,7 +1,4 @@
-import 'package:client/core/constants/app/app_constants.dart';
-import 'package:vexana/vexana.dart';
-
-class ProductNetworkManager extends NetworkManager {
-  ProductNetworkManager()
-      : super(options: BaseOptions(baseUrl: AppConstants.instance.baseUrl));
-}
+// class ProductNetworkManager extends NetworkManager {
+//   ProductNetworkManager()
+//       : super(options: BaseOptions(baseUrl: 'http://localhost:8080/api/v1/'));
+// }

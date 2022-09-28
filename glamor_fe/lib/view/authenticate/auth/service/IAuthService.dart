@@ -7,10 +7,5 @@ abstract class IAuthService {
 
   IAuthService(this.manager);
 
-  //Future<void> authUser();
-  /* [] Locale de tokan var ise token parse edilecek yok ise LoginView yönlendirilecek
-     [] Parse edilen token içerisindeki email ve password ile servise istek atılacak.
-     [] User Authenticate edilir ise sornaki logicler yapılacak. (Henüz Planlanmadı)
-  */
-
+  Future<void> authUser();
 }
