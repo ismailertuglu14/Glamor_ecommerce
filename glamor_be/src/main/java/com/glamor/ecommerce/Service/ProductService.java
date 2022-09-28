@@ -2,6 +2,7 @@ package com.glamor.ecommerce.Service;
 
 import com.glamor.ecommerce.Dto.ProductRequest;
 import com.glamor.ecommerce.Dto.ProductResponse;
+import com.glamor.ecommerce.Entities.Image;
 import com.glamor.ecommerce.Entities.Product;
 import com.glamor.ecommerce.Entities.ProductSubcategory;
 import com.glamor.ecommerce.Exceptions.BrandNotFoundException;
@@ -35,11 +36,20 @@ public class ProductService {
         product.setLocation(newProduct.getLocation());
         product.setBrand(brandRepository.findById(newProduct.getBrand_id()).orElseThrow(() -> new BrandNotFoundException("Brand not found.")));
         product.setUser(userRepository.findById(newProduct.getUser_id()).orElseThrow(() -> new UserNotFoundException("User not found.")));
+
         product.setProduct_subcategory(newProduct.getProduct_subcategory().stream().map(subcategory -> {
             ProductSubcategory productSubcategory = new ProductSubcategory();
             productSubcategory.setProduct(product);
             productSubcategory.setSubcategory(subcategoryRepository.findById(subcategory).orElse(null));
             return productSubcategory;
+        }).collect(Collectors.toList()));
+
+        product.setImages(newProduct.getImages().stream().map(image ->{
+            Image newImage = new Image();
+            newImage.setName(image.getOriginalFilename());
+            newImage.setDirectory(product.getTitle());
+            newImage.setProduct(product);
+            return newImage;
         }).collect(Collectors.toList()));
         return productRepository.save(product);
     }
@@ -55,6 +65,7 @@ public class ProductService {
         response.setBrand(product.getBrand());
         response.setSubcategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory()).collect(Collectors.toList()));
         response.setCategories(product.getProduct_subcategory().stream().map(subcategory -> subcategory.getSubcategory().getCategory()).collect(Collectors.toSet()));
+        response.setImages(product.getImages());
         response.setTotal_like(product.getLikes().size());
         return response;
     }

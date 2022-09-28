@@ -1,9 +1,6 @@
 package com.glamor.ecommerce.Dto;
 
-import com.glamor.ecommerce.Entities.Brand;
-import com.glamor.ecommerce.Entities.Category;
-import com.glamor.ecommerce.Entities.Subcategory;
-import com.glamor.ecommerce.Entities.User;
+import com.glamor.ecommerce.Entities.*;
 import lombok.Data;
 
 import java.util.List;
@@ -19,5 +16,6 @@ public class ProductResponse {
     private User user;
     private List<Subcategory> subcategories;
     private Set<Category> categories;
+    private List<Image> images;
     private int total_like;
 }

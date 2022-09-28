@@ -25,16 +25,15 @@ Glamor e-ticaret projesinin açık kaynak kodudur.
 ```
 
 Product Request
-```JSON
-{
+```form-data
   "title":"example",
   "description":"example",
   "price":999.99,
   "location":"example",
+  "images":[img1.jpg,img2.jpg..]
   "brand_id":0,
   "user_id":0,
   "product_subcategory":[0,1,2..]
-}
 ```
 
 Product Response
@@ -70,6 +69,18 @@ Product Response
         {
             "id": 1,
             "title": "example"
+        }
+    ],
+    "images": [
+        {
+            "id": 1,
+            "name": "img1.jpg",
+            "directory": "example"
+        },
+        {
+            "id": 2,
+            "name": "img2.jpg",
+            "directory": "example"
         }
     ],
     "total_like": 0
