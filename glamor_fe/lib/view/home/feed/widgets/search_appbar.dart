@@ -1,16 +1,51 @@
-// ignore_for_file: avoid_print, must_be_immutable
-
+// ignore_for_file: avoid_print, must_be_immutable, depend_on_referenced_packages
+import 'dart:async';
+import 'package:async/async.dart';
 import 'package:client/core/base/base_view_model.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/extension/context_extension.dart';
 
-class SearchAppbar extends StatelessWidget
+class SearchAppbar extends StatefulWidget
     with PreferredSizeWidget, BaseViewModel {
   SearchAppbar({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
+  State<SearchAppbar> createState() => _SearchAppbarState();
+}
+
+class _SearchAppbarState extends State<SearchAppbar> {
+  late CancelableOperation<void> cancellableOperation;
+  final _delayTime = const Duration(seconds: 1);
+  String text = "";
+  @override
+  void initState() {
+    super.initState();
+    _start();
+  }
+
+  void _start() {
+    cancellableOperation = CancelableOperation.fromFuture(
+      Future.delayed(_delayTime),
+      onCancel: () {
+        print('Canceled');
+      },
+    );
+  }
+
+  void _onItemChanged(String value) {
+    cancellableOperation.cancel();
+    _start();
+    cancellableOperation.value.whenComplete(() {
+      setState(() {
+        text = value;
+      });
+      print(text);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,6 +56,7 @@ class SearchAppbar extends StatelessWidget
           SizedBox(
             width: context.width * 0.85,
             child: TextField(
+              onChanged: _onItemChanged,
               onEditingComplete: () {
                 // todo: Close Keyboard, Clear products List, Set Product with query which is coming from textfield value
                 print('On edit completed! New logic will be calling here!');
@@ -51,7 +87,7 @@ class SearchAppbar extends StatelessWidget
   Widget _buildFiltersContainer() {
     return GestureDetector(
       onTap: () {
-        navigation.navigateToPage(path: NavigationConstants.CATEGORY);
+        widget.navigation.navigateToPage(path: NavigationConstants.CATEGORY);
       },
       child: Icon(
         Icons.format_list_numbered_rtl_sharp,
