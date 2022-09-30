@@ -5,7 +5,9 @@ import 'package:client/view/authenticate/onboard/view/onboard_view.dart';
 import 'package:client/view/authenticate/register/view/register_view.dart';
 import 'package:client/view/authenticate/splash/view/splash_view.dart';
 import 'package:client/view/home/builder/view/home_wrapper.dart';
+import 'package:client/view/home/category/models/subcategory_model.dart';
 import 'package:client/view/home/category/view/category_view.dart';
+import 'package:client/view/home/category/view/subcategory_view.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/product/view/product_view.dart';
 import 'package:client/view/not_found/not_found_view.dart';
@@ -38,13 +40,19 @@ class NavigationRoute {
       case NavigationConstants.CATEGORY:
         return normalNavigate(
             const CategoryView(), NavigationConstants.CATEGORY);
+
+      case NavigationConstants.SUBCATEGORY:
+        return normalNavigate(
+          SubCategoryView(
+              subCategories: args.arguments as List<Subcategories>?),
+          NavigationConstants.SUBCATEGORY,
+        );
+
       // Product View
       case NavigationConstants.PRODUCT_VIEW:
-        if (args.arguments is Product) {
-          return normalNavigate(ProductView(product: args.arguments as Product),
-              NavigationConstants.PRODUCT_VIEW);
-        }
-        throw Exception();
+        return normalNavigate(ProductView(product: args.arguments as Product),
+            NavigationConstants.PRODUCT_VIEW);
+
       //Test View
       case NavigationConstants.TEST_VIEW:
         return normalNavigate(

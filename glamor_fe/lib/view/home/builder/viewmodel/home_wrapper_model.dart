@@ -39,12 +39,3 @@ const List viewList = [
   ChatsView(),
   ProfileView(),
 ];
-
-const List<BottomNavigationBarItem> bottomNavItems = [
-  BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Feed'),
-  BottomNavigationBarItem(
-      icon: Icon(Icons.production_quantity_limits), label: 'MY ADS'),
-  BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label: 'Sell'),
-  BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-  BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
-];

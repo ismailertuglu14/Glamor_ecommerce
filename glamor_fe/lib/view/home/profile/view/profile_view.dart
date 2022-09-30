@@ -37,43 +37,50 @@ class _ProfileViewState extends ProfileViewModel {
       child: Column(
         children: [
           const ProfileCard(),
-          SettingsCard(context,
+          SettingsCard(
               icon: Icons.shopping_bag_outlined,
               path: '',
               title: 'Buy Packages',
               tooltip: 'Packages'),
 
-          SettingsCard(context,
-              icon: Icons.privacy_tip_outlined,
-              path: '',
-              title: 'Privacy',
-              tooltip: 'Privacy'),
-          SettingsCard(context,
-              icon: Icons.group,
-              path: '',
-              title: 'Help & Support',
-              tooltip: 'Help & Support'),
-
+          SettingsCard(
+            icon: Icons.privacy_tip_outlined,
+            path: '',
+            title: 'Privacy',
+          ),
+          SettingsCard(
+            icon: Icons.group,
+            path: '',
+            title: 'Help & Support',
+          ),
+          SettingsCard(
+            icon: Icons.settings,
+            path: '/appSettings',
+            title: 'App Settings',
+          ),
           // Logout Function Widget
           const Expanded(
             child: SizedBox(),
           ),
-          SettingsCard(context, icon: Icons.settings, title: 'Logout',
+          SettingsCard(
+              icon: Icons.logout,
+              title: 'Logout',
               func: () {
-            provider.setToken = '';
-            LocaleManager.instance.clearAllSaveFirst();
-          })
+                provider.setToken = '';
+                LocaleManager.instance.clearAllSaveFirst();
+              })
         ],
       ),
     );
   }
 
-  Widget SettingsCard(BuildContext context,
-      {required IconData icon,
-      required String title,
-      String? tooltip,
-      String? path,
-      Function? func}) {
+  Widget SettingsCard({
+    required IconData icon,
+    required String title,
+    String? tooltip,
+    String? path,
+    Function? func,
+  }) {
     return GestureDetector(
       onTap: () {
         path != null ? navigation.navigateToPage(path: path) : func!();
@@ -85,7 +92,7 @@ class _ProfileViewState extends ProfileViewModel {
           trailing: func == null
               ? IconButton(
                   onPressed: () {},
-                  tooltip: tooltip,
+                  tooltip: tooltip ?? title,
                   icon: const Icon(Icons.arrow_forward_ios),
                 )
               : null,

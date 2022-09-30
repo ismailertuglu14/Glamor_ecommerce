@@ -2,7 +2,7 @@
 
 import 'package:client/core/constants/app/app_constants.dart';
 import 'package:client/core/init/notifier/providers.dart';
-import 'package:client/core/init/notifier/theme_notifier.dart';
+import 'package:client/product/provider/theme_bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,12 +35,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: AppConstants.instance.APP_NAME,
-      theme: context.watch<ThemeNotifier>().currentTheme,
-      onGenerateRoute: NavigationRoute.instance.generateRoute,
-      navigatorKey: NavigationService.instance.navigatorKey,
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: AppConstants.instance.APP_NAME,
+          theme: state.themeData,
+          onGenerateRoute: NavigationRoute.instance.generateRoute,
+          navigatorKey: NavigationService.instance.navigatorKey,
+        );
+      },
     );
   }
 }

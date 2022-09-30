@@ -1,1 +1,0 @@
-enum AuthQueries { login, register }

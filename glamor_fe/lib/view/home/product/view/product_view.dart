@@ -2,7 +2,6 @@
 
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class ProductView extends StatefulWidget {
   final Product product;
@@ -37,11 +36,18 @@ class _ProductViewState extends State<ProductView> {
   }
 
   Widget _buildImageSlideShow() {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height / 3;
+    //final width = MediaQuery.of(context).size.width;
+    //final height = MediaQuery.of(context).size.height / 3;
     return Container(
       color: Colors.red,
-      child: ImageSlideshow(
+      child: SizedBox(
+        height: 100,
+        width: 100,
+        child: Image.network(
+          'https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg',
+          fit: BoxFit.contain,
+        ),
+      ), /*ImageSlideshow(
         width: width,
         height: height,
         children: const [
@@ -63,7 +69,7 @@ class _ProductViewState extends State<ProductView> {
           //   fit: BoxFit.fill,
           // ),
         ],
-      ),
+      ),*/
     );
   }
 

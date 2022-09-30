@@ -25,7 +25,8 @@ class ProductsCubit extends Cubit<ProductsState> {
   }
 
   void _changeLoading() {
-    emit(state.copyWith(isLoading: !(state.isLoading ?? false)));
+    Future.delayed(const Duration(seconds: 1)).then(
+        (_) => emit(state.copyWith(isLoading: !(state.isLoading ?? false))));
   }
 
   /*  Lazy Loading fetch products*/

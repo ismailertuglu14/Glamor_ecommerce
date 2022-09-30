@@ -10,5 +10,4 @@ class AppConstants {
   AppConstants._init();
 
   final String APP_NAME = 'Glamor';
-  final String baseUrl = 'https://fakestoreapi.com/';
 }

@@ -7,8 +7,11 @@ class NavigationConstants {
   static const LOGIN_VIEW = '/login';
   static const REGISTER_VIEW = '/register';
   static const HOME_VIEW = '/home';
-  static const CATEGORY = '/category';
   static const PRODUCT_VIEW = '/productView';
   static const TEST_VIEW = '/test';
   static const NOT_FOUND_VIEW = '/notFound';
+
+  //Category
+  static const CATEGORY = '/category';
+  static const SUBCATEGORY = '/subCategory';
 }

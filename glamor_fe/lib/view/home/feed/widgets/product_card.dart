@@ -1,6 +1,7 @@
 import 'package:client/core/constants/navigation/navigation_constants.dart';
 import 'package:client/core/init/navigation/navigation_service.dart';
-import 'package:client/product/extension/string_extension.dart';
+import 'package:client/core/extension/string_extension.dart';
+import 'package:client/product/utility/image/project_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../model/product_model.dart';
@@ -20,6 +21,7 @@ class ProductCard extends StatelessWidget {
 
 Widget buildImageInteractionCard(Product product, BuildContext context) {
   return GestureDetector(
+    key: UniqueKey(),
     onTap: () {
       NavigationService.instance.navigateToPage(
           path: NavigationConstants.PRODUCT_VIEW, data: product);
@@ -35,16 +37,15 @@ Widget buildImageInteractionCard(Product product, BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             /* Product Image*/
-            Stack(
-              children: const [
-                // SizedBox(
-                //   height: 100,
-                //   child: ProjectNetworkImage(
-                //     src: product.toString(),
-                //   ),
-                // ),
-              ],
+            SizedBox(
+              height: context.highValue * 1.5,
+              width: double.infinity,
+              child: ProjectNetworkImage(
+                src:
+                    'https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg',
+              ),
             ),
+
             /* Product Title*/
             Padding(
               padding: const EdgeInsets.all(16).copyWith(bottom: 0),
@@ -53,35 +54,23 @@ Widget buildImageInteractionCard(Product product, BuildContext context) {
                 style: const TextStyle(fontSize: 16),
               ),
             ),
-            /* Product Rate*/
-            ButtonBar(
-              alignment: MainAxisAlignment.start,
-              children: [
-                TextButton(
-                  child: Text('${product.title}⭐'),
-                  onPressed: () {},
-                ),
-                /* Product Price*/
-                TextButton(
-                  child: Text('${product.price} TL'),
-                  onPressed: () {},
-                )
-              ],
-            ),
+
             /* Product Seller Location */
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 5).copyWith(bottom: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10)
+                  .copyWith(bottom: 5),
               child: Row(
-                children: const [
-                  Icon(
+                children: [
+                  const Icon(
                     Icons.location_on_outlined,
                     size: 18,
                   ),
-                  Text(
-                    'TUZLA, ISTANBUL',
+                  const Text(
+                    'Istanbul',
                     style: TextStyle(fontSize: 12),
                   ),
+                  const Expanded(child: SizedBox()),
+                  Text('${product.price} TL'),
                 ],
               ),
             ),

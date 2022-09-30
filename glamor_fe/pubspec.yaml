@@ -56,7 +56,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   equatable: ^2.0.5
   kartal: ^2.4.3
-
+  lazy_load_scrollview: ^1.3.0
   #images
   flutter_image_slideshow: ^0.1.4
   lottie: ^1.4.2

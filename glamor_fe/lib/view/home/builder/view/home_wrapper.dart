@@ -1,4 +1,5 @@
 import 'package:client/view/_product/widgets/popup/exit_popup.dart';
+import 'package:client/view/home/builder/model/bottom_navigatior_items.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,7 @@ class _HomeWrapperState extends HomeWrapperModel {
           },
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.grey,
-          items: bottomNavItems,
+          items: BottomNavigatorListModel().toWidgets(),
         ),
       ),
     );

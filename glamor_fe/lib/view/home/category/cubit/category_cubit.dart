@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:client/view/home/category/models/category_model.dart';
+import 'package:client/view/home/category/models/subcategory_model.dart';
 import 'package:client/view/home/category/service/ICategoryService.dart';
 import 'package:equatable/equatable.dart';
 
@@ -13,6 +15,12 @@ class CategoryCubit extends Cubit<CategoryState> {
   Future<void> fetchAllCategories() async {
     final response = await categoryService.fetchAllCategories();
     emit(state.copyWith(categories: response));
+  }
+
+  Future<void> fetchSubcategories({required int id}) async {
+    final response = await categoryService.fetchSubcategories(id: id);
+
+    emit(state.copyWith(subcategories: response!.subcategories));
   }
   //Future<void> fetchAllSubCategories() async{}
 

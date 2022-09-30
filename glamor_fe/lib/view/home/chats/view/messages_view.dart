@@ -1,3 +1,4 @@
+import 'package:client/view/home/chats/widget/chat_card.dart';
 import 'package:flutter/material.dart';
 
 class MessagesView extends StatefulWidget {
@@ -35,7 +36,7 @@ class _MessagesViewState extends State<MessagesView> {
                       ),
                     ),
                   )
-                : const SizedBox(),
+                : const ChatCard(),
           ],
         ),
       ),
