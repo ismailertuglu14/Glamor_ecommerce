@@ -9,5 +9,8 @@ class AppConstants {
 
   AppConstants._init();
 
-  final String APP_NAME = 'Glamor';
+  static const String APP_NAME = 'Glamor';
+  static const LANG_ASSET_PATH = 'assets/lang';
+
+  static const String APP_VERSION = '1.0.0';
 }

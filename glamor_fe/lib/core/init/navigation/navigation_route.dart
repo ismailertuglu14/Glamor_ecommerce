@@ -10,6 +10,7 @@ import 'package:client/view/home/category/view/category_view.dart';
 import 'package:client/view/home/category/view/subcategory_view.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/product/view/product_view.dart';
+import 'package:client/view/home/profile/view/app_settings/app_settings.dart';
 import 'package:client/view/not_found/not_found_view.dart';
 import 'package:flutter/material.dart';
 
@@ -52,6 +53,11 @@ class NavigationRoute {
       case NavigationConstants.PRODUCT_VIEW:
         return normalNavigate(ProductView(product: args.arguments as Product),
             NavigationConstants.PRODUCT_VIEW);
+
+      /*  SETTINGS */
+
+      case NavigationConstants.APP_SETTINGS:
+        return normalNavigate(AppSettings(), NavigationConstants.APP_SETTINGS);
 
       //Test View
       case NavigationConstants.TEST_VIEW:

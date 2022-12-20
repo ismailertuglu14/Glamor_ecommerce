@@ -1,6 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 class NavigationConstants {
+  NavigationConstants._();
+
   static const DEFAULT = '/';
   static const ON_BOARD_VIEW = '/onBoard';
   static const AUTH = 'auth';
@@ -14,4 +16,10 @@ class NavigationConstants {
   //Category
   static const CATEGORY = '/category';
   static const SUBCATEGORY = '/subCategory';
+
+  //settings
+  static const BUY_PACKAGES = "/settings/buyPackages";
+  static const PRIVACY = "/settings/privacy";
+  static const HELP_SUPPORT = "/settings/helpSupport";
+  static const APP_SETTINGS = "/settings/appSettings";
 }
