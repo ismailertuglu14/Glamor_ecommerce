@@ -8,6 +8,7 @@ class Product extends INetworkModel<Product> {
   Brand? brand;
   User? user;
   ProductImage? images;
+
   Product(
       {this.title,
       this.description,
@@ -16,26 +17,6 @@ class Product extends INetworkModel<Product> {
       this.brand,
       this.user,
       this.images});
-
-  Product copyWith({
-    String? title,
-    String? description,
-    double? price,
-    String? location,
-    Brand? brand,
-    User? user,
-    ProductImage? images,
-  }) {
-    return Product(
-      title: title ?? this.title,
-      description: description ?? this.description,
-      price: price ?? this.price,
-      location: location ?? this.location,
-      brand: brand ?? this.brand,
-      user: user ?? this.user,
-      images: images ?? this.images,
-    );
-  }
 
   @override
   Map<String, dynamic> toJson() {
