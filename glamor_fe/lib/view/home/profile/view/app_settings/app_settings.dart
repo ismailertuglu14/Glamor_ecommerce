@@ -32,7 +32,7 @@ class _AppSettingsState extends State<AppSettings> {
                 },
                 child: const Text('Türkçe')),
             Text(LocaleKeys.welcome.locale),
-            Text("Current Language : " + context.locale.toString()),
+            Text("Current Language : ${context.locale}"),
           ],
         ),
       ),

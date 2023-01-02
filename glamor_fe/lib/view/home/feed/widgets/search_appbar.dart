@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:async/async.dart';
 import 'package:client/core/base/base_view_model.dart';
 import 'package:client/core/constants/navigation/navigation_constants.dart';
+import 'package:client/view/home/feed/cubit/search/search_cubit.dart';
+import 'package:client/view/home/feed/cubit/search/search_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/extension/context_extension.dart';
 
 class SearchAppbar extends StatefulWidget
@@ -48,39 +51,55 @@ class _SearchAppbarState extends State<SearchAppbar> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: context.width * 0.85,
-            child: TextField(
-              onChanged: _onItemChanged,
-              onEditingComplete: () {
-                // todo: Close Keyboard, Clear products List, Set Product with query which is coming from textfield value
-                print('On edit completed! New logic will be calling here!');
-              },
-              decoration: InputDecoration(
-                hintText: 'Search product, brand, user, #hashtag',
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: Colors.green,
-                ),
-                hintStyle: const TextStyle(fontSize: 14),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    //todo: Clear text stuffs
+    return BlocConsumer<SearchCubit, SearchState>(
+      listener: (context, state) {
+        if (state.isClicked == true) {
+          print("Tiklandi");
+        } else {
+          print("Tiklanmadi");
+        }
+      },
+      bloc: SearchCubit(),
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: context.width * 0.85,
+                child: TextField(
+                  onTap: () => {
+                    context.read<SearchCubit>().changeIsClicked(true),
+                    print(state.isClicked == true ? "Tiklandi" : "Tiklanmadi"),
                   },
-                  child: const Icon(Icons.close),
+                  onChanged: _onItemChanged,
+                  onEditingComplete: () {
+                    // todo: Close Keyboard, Clear products List, Set Product with query which is coming from textfield value
+                    print('On edit completed! New logic will be calling here!');
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Search product, brand, user, #hashtag',
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: Colors.green,
+                    ),
+                    hintStyle: const TextStyle(fontSize: 14),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        //todo: Clear text stuffs
+                      },
+                      child: const Icon(Icons.close),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(width: 5),
+              _buildFiltersContainer(),
+            ],
           ),
-          const SizedBox(width: 5),
-          _buildFiltersContainer(),
-        ],
-      ),
+        );
+      },
     );
   }
 

@@ -18,6 +18,7 @@ extension MediaQueryExtension on BuildContext {
   double get normalValue => height * 0.02;
   double get mediumValue => height * 0.08;
   double get highValue => height * 0.1;
+  double get veryHighValue => height * 0.3;
 }
 
 extension PaddingExtensionAll on BuildContext {

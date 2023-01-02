@@ -12,3 +12,7 @@ extension ProductTitleExtension on String {
 extension StringLocalization on String {
   String get locale => this.tr();
 }
+
+extension NullString on String? {
+  String get isNull => this ?? '';
+}

@@ -12,6 +12,7 @@ abstract class ChatsViewModel extends State<ChatsView>
     tabController = TabController(length: 2, vsync: this);
   }
 
+  // Top tab bar
   TabBar tab() {
     return TabBar(
       padding: EdgeInsets.zero,
@@ -25,7 +26,8 @@ abstract class ChatsViewModel extends State<ChatsView>
     );
   }
 
-  TabBarView tabbarView() {
+  // Body Tab View
+  tabbarView() {
     return TabBarView(
       controller: tabController,
       children: const [

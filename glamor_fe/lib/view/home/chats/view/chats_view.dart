@@ -1,3 +1,4 @@
+import 'package:client/product/utility/scaffold_padding.dart';
 import 'package:client/view/home/chats/viewmodel/chats_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +14,15 @@ class _ChatsViewState extends ChatsViewModel {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: MyTabViews.values.length,
-      child: Scaffold(
-        extendBody: true,
-        appBar: tab(),
-        body: tabbarView(),
+      child: Container(
+        margin: const ScaffoldPadding.paddingTopHigh(),
+        child: Scaffold(
+          extendBody: true,
+          appBar: tab(),
+          body: tabbarView(),
+        ),
       ),
     );
   }
 }
+

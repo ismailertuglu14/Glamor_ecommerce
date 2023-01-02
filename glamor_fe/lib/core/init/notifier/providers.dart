@@ -8,6 +8,7 @@ import 'package:client/view/home/builder/viewmodel/home_wrapper_model.dart';
 import 'package:client/view/home/category/cubit/category_cubit.dart';
 import 'package:client/view/home/category/service/category_service.dart';
 import 'package:client/view/home/feed/cubit/products_cubit.dart';
+import 'package:client/view/home/feed/cubit/search/search_cubit.dart';
 import 'package:client/view/home/feed/service/product_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -57,5 +58,6 @@ class ApplicationProvider {
         create: (context) => CategoryCubit(
             CategoryService(VexanaManager.instance.networkManager))),
     BlocProvider(create: (context) => ThemeBloc()),
+    BlocProvider(create: (context) => SearchCubit()),
   ];
 }

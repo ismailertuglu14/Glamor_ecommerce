@@ -1,7 +1,11 @@
 // ignore_for_file: avoid_print
 
+import 'package:client/core/extension/context_extension.dart';
+import 'package:client/core/extension/string_extension.dart';
+import 'package:client/product/utility/custom_padding.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class ProductView extends StatefulWidget {
   final Product product;
@@ -18,14 +22,16 @@ class _ProductViewState extends State<ProductView> {
 
   Scaffold _buildScaffold() {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      body: Container(
+        margin: const CustomPadding.paddingTopHigh(),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildImageSlideShow(),
               _buildTitle(),
+              _buildDescription()
               //? _buildSellerCard(),
             ],
           ),
@@ -36,52 +42,42 @@ class _ProductViewState extends State<ProductView> {
   }
 
   Widget _buildImageSlideShow() {
-    //final width = MediaQuery.of(context).size.width;
-    //final height = MediaQuery.of(context).size.height / 3;
-    return Container(
-      color: Colors.red,
-      child: SizedBox(
-        height: 100,
-        width: 100,
-        child: Image.network(
-          'https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg',
-          fit: BoxFit.contain,
-        ),
-      ), /*ImageSlideshow(
-        width: width,
-        height: height,
-        children: const [
-          //! Temporary dummy data
-          // Image.network(
-          //   widget.product.image.toString(),
-          //   fit: BoxFit.fill,
-          // ),
-          // Image.network(
-          //   widget.product.image.toString(),
-          //   fit: BoxFit.fill,
-          // ),
-          // Image.network(
-          //   widget.product.image.toString(),
-          //   fit: BoxFit.fill,
-          // ),
-          // Image.network(
-          //   widget.product.image.toString(),
-          //   fit: BoxFit.fill,
-          // ),
-        ],
-      ),*/
+    return ImageSlideshow(
+      width: context.width,
+      height: context.veryHighValue,
+      children: [
+        Image.asset('assets/mock/product/mac1.jpeg', fit: BoxFit.fill),
+        Image.asset('assets/mock/product/mac1.jpeg', fit: BoxFit.fill),
+        Image.asset('assets/mock/product/mac1.jpeg', fit: BoxFit.fill),
+        Image.asset('assets/mock/product/mac1.jpeg', fit: BoxFit.fill),
+      ],
     );
   }
 
   Widget _buildTitle() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+      padding: const EdgeInsets.only(top: 16.0, left: 12),
       child: Text(
         '${widget.product.title}',
         style: TextStyle(
             color: Theme.of(context).colorScheme.primary,
-            fontSize: Theme.of(context).textTheme.titleSmall!.fontSize,
+            fontSize: Theme.of(context).textTheme.titleLarge!.fontSize,
             fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget _buildDescription() {
+    /// isNull is my extension for [String?].
+    /// Check more information String extensions under core/extensions folder
+    return Padding(
+      padding: const EdgeInsets.only(top: 12, left: 12),
+      child: Text(
+        widget.product.description.isNull,
+        style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontSize: Theme.of(context).textTheme.titleSmall!.fontSize,
+            fontWeight: FontWeight.w400),
       ),
     );
   }
