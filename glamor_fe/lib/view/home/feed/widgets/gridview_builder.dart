@@ -1,7 +1,8 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:client/product/utility/grid_util.dart';
-import 'package:client/view/home/feed/cubit/products_cubit.dart';
+import 'package:client/view/home/feed/cubit/product/products_cubit.dart';
+
 import 'package:client/view/home/feed/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -7,13 +7,13 @@ import 'package:client/view/authenticate/login/service/login_service.dart';
 import 'package:client/view/home/builder/viewmodel/home_wrapper_model.dart';
 import 'package:client/view/home/category/cubit/category_cubit.dart';
 import 'package:client/view/home/category/service/category_service.dart';
-import 'package:client/view/home/feed/cubit/products_cubit.dart';
 import 'package:client/view/home/feed/cubit/search/search_cubit.dart';
 import 'package:client/view/home/feed/service/product_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+import '../../../view/home/feed/cubit/product/products_cubit.dart';
 import '../navigation/navigation_service.dart';
 
 class ApplicationProvider {
