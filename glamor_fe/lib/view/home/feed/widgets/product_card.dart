@@ -21,63 +21,60 @@ class ProductCard extends StatelessWidget {
 
 Widget buildImageInteractionCard(Product product, BuildContext context) {
   return GestureDetector(
-    key: UniqueKey(),
     onTap: () {
       NavigationService.instance.navigateToPage(
           path: NavigationConstants.PRODUCT_VIEW, data: product);
     },
-    child: SizedBox(
-      height: context.highValue * 3,
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            /* Product Image*/
-            SizedBox(
-                height: context.highValue * 1.5,
-                width: double.infinity,
-                child: Image.asset('assets/mock/product/mac1.jpeg')
-                // child: ProjectNetworkImage(
-                //   src:
-                //       'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-space-gray-config-201810?wid=1078&hei=624&fmt=jpeg&qlt=90&.v=1664499515473',
-                //   //'https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg',
-                // ),
+    child: Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          /* Product Image*/
+          SizedBox(
+            height: context.highValue * 1.5,
+            width: double.infinity,
+            child: Image.network("http://localhost:5757/${product.coverImage}"),
+            // Image.asset('assets/mock/product/mac1.jpeg')
+            // child: ProjectNetworkImage(
+            //   src:
+            //       'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-space-gray-config-201810?wid=1078&hei=624&fmt=jpeg&qlt=90&.v=1664499515473',
+            //   //'https://pbs.twimg.com/profile_images/949787136030539782/LnRrYf6e_400x400.jpg',
+            // ),
+          ),
+
+          /* Product Title*/
+          Padding(
+            padding: const EdgeInsets.all(16).copyWith(bottom: 0),
+            child: Text(
+              product.title.toString().constrict(),
+              style: const TextStyle(fontSize: 16),
+            ),
+          ),
+
+          /* Product Seller Location */
+          Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10).copyWith(bottom: 5),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.location_on_outlined,
+                  size: 18,
                 ),
-
-            /* Product Title*/
-            Padding(
-              padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-              child: Text(
-                product.title.toString().constrict(),
-                style: const TextStyle(fontSize: 16),
-              ),
+                const Text(
+                  'Istanbul',
+                  style: TextStyle(fontSize: 12),
+                ),
+                const Expanded(child: SizedBox()),
+                Text('${product.price} TL'),
+              ],
             ),
-
-            /* Product Seller Location */
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10)
-                  .copyWith(bottom: 5),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.location_on_outlined,
-                    size: 18,
-                  ),
-                  const Text(
-                    'Istanbul',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  const Expanded(child: SizedBox()),
-                  Text('${product.price} TL'),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );

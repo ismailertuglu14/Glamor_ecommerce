@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SubCategoryView extends StatefulWidget {
-  List<Subcategories>? subCategories;
+  List<Subcategory>? subCategories;
   SubCategoryView({super.key, this.subCategories});
   @override
   State<SubCategoryView> createState() => _SubCategoryViewState();

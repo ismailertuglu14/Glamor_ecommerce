@@ -9,5 +9,5 @@ abstract class ICategoryService {
   ICategoryService(INetworkManager networkManager)
       : networkManager = networkManager;
   Future<List<Category>?> fetchAllCategories();
-  Future<Subcategory?> fetchSubcategories({required int id});
+  Future<List<Subcategory>?> fetchSubcategories({required int id});
 }

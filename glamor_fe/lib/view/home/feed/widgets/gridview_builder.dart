@@ -14,7 +14,7 @@ class GridViewBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    int _value = 100;
+    int _value = 200;
 
     /// Padding between 2 product card in a [Vertical plane], you can change padding by changing [_value];
     final double itemHeight = (size.height - kToolbarHeight - _value) / 2;
@@ -28,15 +28,7 @@ class GridViewBuilder extends StatelessWidget {
           gridDelegate: FeedGridDelegate(width: itemWidth, height: itemHeight),
           itemCount: state.products?.length ?? 0,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ProductCard(product: state.products?[index]),
-                state.products.isNotNullOrEmpty &&
-                        index == state.products!.length - 1
-                    ? const SizedBox.shrink() //Loading
-                    : const SizedBox.shrink()
-              ],
-            );
+            return ProductCard(product: state.products?[index]);
           },
         );
       },
