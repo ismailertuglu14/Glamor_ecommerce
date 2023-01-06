@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:vexana/vexana.dart';
 
 class VexanaManager {
@@ -8,11 +10,15 @@ class VexanaManager {
     return _instace!;
   }
 
-  static const String _baseUrl = 'http://127.0.0.1:8080/api/v1/';
   VexanaManager._init();
+
+  static const String _baseUrl = 'http://127.0.0.1:5757/api/';
 
   INetworkManager networkManager = NetworkManager(
     isEnableLogger: true,
-    options: BaseOptions(baseUrl: _baseUrl),
+    options: BaseOptions(baseUrl: _baseUrl, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }),
   );
 }
