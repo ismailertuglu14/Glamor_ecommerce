@@ -20,7 +20,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   Future<void> fetchSubcategories({required int id}) async {
     final response = await categoryService.fetchSubcategories(id: id);
 
-    emit(state.copyWith(subcategories: response!.subcategories));
+    emit(state.copyWith(subcategories: response ?? []));
   }
   //Future<void> fetchAllSubCategories() async{}
 
