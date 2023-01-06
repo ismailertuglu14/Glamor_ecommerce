@@ -1,3 +1,4 @@
+import 'package:client/core/init/network/vexana_manager.dart';
 import 'package:client/view/home/category/service/ICategoryService.dart';
 import 'package:client/view/home/category/service/category_service.dart';
 import 'package:client/view/home/feed/service/IProductService.dart';
@@ -10,9 +11,9 @@ void main() {
   late ICategoryService categoryService;
   setUp(() {
     productService = ProductService(NetworkManager(
-        options: BaseOptions(baseUrl: 'http://localhost:8080/api/v1')));
-    categoryService = CategoryService(NetworkManager(
-        options: BaseOptions(baseUrl: 'http://localhost:8080/api/v1')));
+        options: BaseOptions(baseUrl: 'http://localhost:5757/api/')));
+
+    categoryService = CategoryService(VexanaManager.instance.networkManager);
   });
   test('fetch lazy products test', () async {
     final response = await productService.fetchAllProducts();
