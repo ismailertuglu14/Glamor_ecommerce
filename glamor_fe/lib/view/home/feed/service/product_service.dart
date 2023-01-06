@@ -1,6 +1,7 @@
 import 'package:client/product/enums/product_serivce_enum.dart';
 import 'package:client/view/home/feed/model/product_model.dart';
 import 'package:client/view/home/feed/service/IProductService.dart';
+
 import 'package:vexana/vexana.dart';
 
 class ProductService extends IProductService {
@@ -25,7 +26,7 @@ class ProductService extends IProductService {
   Future<List<Product>?> getProductsByQuery(
       Map<String, dynamic> queries) async {
     final response = await networkManager.send<Product, List<Product>>(
-        ProductServicePath.products.name,
+        '/product/q',
         parseModel: Product(),
         method: RequestType.GET,
         queryParameters: queries);

@@ -11,6 +11,13 @@ class ProductsCubit extends Cubit<ProductsState> {
     initialComplete();
   }
 
+  
+  void _changeLoading() {
+    Future.delayed(const Duration(seconds: 1)).then(
+        (_) => emit(state.copyWith(isLoading: !(state.isLoading ?? false))));
+  }
+
+  
   Future<void> fetchAllProducts() async {
     _changeLoading();
     final response = await productService.fetchAllProducts();
@@ -18,15 +25,12 @@ class ProductsCubit extends Cubit<ProductsState> {
     _changeLoading();
   }
 
+   
+
   Future<void> fetchProductsByQuery() async {
     _changeLoading();
     // todo: Get Product List by selected category's query
     _changeLoading();
-  }
-
-  void _changeLoading() {
-    Future.delayed(const Duration(seconds: 1)).then(
-        (_) => emit(state.copyWith(isLoading: !(state.isLoading ?? false))));
   }
 
   /*  Lazy Loading fetch products*/
