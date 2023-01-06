@@ -44,8 +44,7 @@ class NavigationRoute {
 
       case NavigationConstants.SUBCATEGORY:
         return normalNavigate(
-          SubCategoryView(
-              subCategories: args.arguments as List<Subcategories>?),
+          SubCategoryView(subCategories: args.arguments as List<Subcategory>?),
           NavigationConstants.SUBCATEGORY,
         );
 
