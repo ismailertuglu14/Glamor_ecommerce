@@ -18,6 +18,7 @@ class NavigationConstants {
   static const SUBCATEGORY = '/subCategory';
 
   //settings
+  static const PROFILE_DETAIL = "/profileDetail";
   static const BUY_PACKAGES = "/settings/buyPackages";
   static const PRIVACY = "/settings/privacy";
   static const HELP_SUPPORT = "/settings/helpSupport";

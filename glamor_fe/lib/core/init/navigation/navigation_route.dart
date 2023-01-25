@@ -14,6 +14,8 @@ import 'package:client/view/home/profile/view/app_settings/app_settings.dart';
 import 'package:client/view/not_found/not_found_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../../view/home/profile/view/profile_detail/view/profile_detail_view.dart';
+
 class NavigationRoute {
   static final NavigationRoute _instance = NavigationRoute._init();
   static NavigationRoute get instance => _instance;
@@ -57,6 +59,11 @@ class NavigationRoute {
 
       case NavigationConstants.APP_SETTINGS:
         return normalNavigate(AppSettings(), NavigationConstants.APP_SETTINGS);
+
+      /* PROFILE DETAIL*/
+      case NavigationConstants.PROFILE_DETAIL:
+        return normalNavigate(
+            const ProfileDetailView(), NavigationConstants.PROFILE_DETAIL);
 
       //Test View
       case NavigationConstants.TEST_VIEW:

@@ -49,7 +49,7 @@ class AppThemeLight extends AppTheme with ILightTheme {
   TabBarTheme get tabBarTheme {
     return TabBarTheme(
       labelColor: _appColorScheme.onSecondary,
-      labelStyle: textThemeLight!.headline5,
+      labelStyle: textThemeLight!.overline,
       unselectedLabelColor: _appColorScheme.onSecondary.withOpacity(0.2),
       // unselectedLabelStyle: textThemeLight.headline4.copyWith(color: colorSchemeLight.red),
     );
